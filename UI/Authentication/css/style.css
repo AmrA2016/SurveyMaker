@@ -1,0 +1,71 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.form {
+  position: absolute;
+  left: 450px;
+  z-index: 1;
+  background: #FFFFFF;
+  width: 460px;
+  height: 500px;
+  margin: 0 auto;
+  padding: 25px;
+  top: 80px;
+  box-shadow: 2px 2px 10px grey;
+}
+.form-form {
+  position: relative;
+  top: 40px;
+  z-index: 2;
+  background: #FFFFFF;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 15px;
+}
+.form-text{
+  font-size: 12px;
+  text-align: left;
+  font-weight: bold;
+
+}
+body {
+  background: #EFF5FB; /* fallback for old browsers */
+  background: -moz-linear-gradient(#EFF5FB);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.survey-maker{
+   max-width: 360px;
+   position: relative;
+   top: 30px;
+   margin: 0 auto;
+   border-bottom: 1px solid #D1D1D1;
+}
+#surveymaker{
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: serif;
+}
+#login{
+  text-align: center;
+  font-size: 20px;
+}
+#not-registered{
+  text-align: center;
+  font-size: 12px;
+}
+#forgot{
+  display: inline-block;
+  align-content: flex-end;
+  font-size: 12px;
+  color: grey;
+
+}
+.form-check-input{
+  text-align: left;
+}
+.app-name{
+  position: relative;
+  bottom: 10px;
+}
