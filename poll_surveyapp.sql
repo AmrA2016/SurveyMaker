@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2017 at 07:14 PM
+-- Generation Time: Dec 01, 2017 at 06:55 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -170,8 +170,22 @@ CREATE TABLE `user` (
   `lastName` varchar(100) NOT NULL,
   `mail` varchar(100) NOT NULL,
   `mobileNumber` varchar(100) NOT NULL,
-  `type` varchar(100) NOT NULL
+  `type` varchar(100) NOT NULL,
+  `suspended` tinyint(1) NOT NULL,
+  `verified` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `verfication_token`
+--
+
+CREATE TABLE `verfication_token` (
+  `id` int(11) NOT NULL,
+  `token` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -262,6 +276,12 @@ ALTER TABLE `survey_answer`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `verfication_token`
+--
+ALTER TABLE `verfication_token`
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -395,6 +415,12 @@ ALTER TABLE `survey`
 ALTER TABLE `survey_answer`
   ADD CONSTRAINT `survey_answer_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `survey_answer_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `verfication_token`
+--
+ALTER TABLE `verfication_token`
+  ADD CONSTRAINT `fk_token_userid` FOREIGN KEY (`user_id`) REFERENCES `user` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
