@@ -3,35 +3,35 @@
   <head>
     <title>Login form</title>
     <link rel="stylesheet" href="../Global/css/bootstrap.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/LoginStyle.css">
   </head>
   <body>
 
 
-  <div class = "row">
-        <div class="form-form col-lg-12 col-md-6 col-sm-4 col-xs-2">
-          <div class="app-name col-lg-12 col-md-6 col-sm-4 col-xs-2"
-            <h2 id= "surveymaker"> Survey Maker </h2>
-          </div>
-        <div class="survey-maker col-lg-12 col-md-6 col-sm-4 col-xs-2">
-          <h4 id="login"> Login to Survey Maker </h4>
-          <p id="not-registered"> not registered yet? <a href="">sign up now</a></p>
-        </div>
-  </div>
-  <div class="row">
-       <div class="form col-lg-12 col-md-6 col-sm-4 col-xs-2">
+  <div class = "container">
+   <div class = "col-lg-4">
+   </div>
+    <div class="col-lg-4">
+       <div class="jumbotron">
+         <div class = "app-name">
+           <h2 id= "surveymaker"> Survey Maker </h2>
+         </div>
+         <div class = "survey-maker">
+           <h4>Login to Survey Maker</h4>
+           <h6>Not registered yet?<a>sign up now</a></h6>
+         </div>
         <form>
-              <div class="form-group col-lg-12 col-md-6 col-sm-4 col-xs-2">
+              <div class="form-group">
                 <label class= "form-text" for="exampleInputEmail1">Email</label>
-                <input type="email" class="form-control form-text" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
               </div>
-              <div class="form-group col-lg-12 col-md-6 col-sm-4 col-xs-2">
-                <label class= "form-text" for="exampleInputPassword1">Password</label>
+              <div class="form-group">
+                <label class="form-text" for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control form-text" id="exampleInputPassword1" placeholder="">
                 <a id="forgot" href="">forgot password?</a>
               </div>
-              <div class="form-check col-lg-12 col-md-6 col-sm-4 col-xs-2">
-                <label class= "form-text" class="form-check-label">
+              <div class="form-check">
+                <label class="form-check-label form-text">
                   <input type="checkbox" class="form-check-input">
                   Remember me
                 </label>
@@ -39,6 +39,9 @@
               <button type="submit" class="btn btn-primary form-text">Login</button>
       </form>
     </div>
+  </div>
+  <div class = "col-lg-4">
+  </div>
   </div>
 
 
