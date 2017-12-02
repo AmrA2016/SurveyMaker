@@ -1,26 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-.form {
-  position: absolute;
-  left: 450px;
-  z-index: 2;
-  background: #FFFFFF;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 25px;
-  top: 250px;
+.jumbotron{
+  margin-top: 150px;
+  background-color: white;
+  width: 400px;
 
-}
-.form-form {
-  position: relative;
-  top: 80px;
-  z-index: 1;
-  background: #FFFFFF;
-  max-width: 460px;
-  height: 500px;
-  margin: 0 auto;
-  padding: 15px;
-  box-shadow: 2px 2px 10px grey;
 }
 .form-text{
   font-size: 12px;
@@ -36,11 +20,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+h4, h6{
+  text-align: center;
+}
 .survey-maker{
-   max-width: 360px;
-   position: relative;
-   top: 30px;
-   margin: 0 auto;
+  position: relative;
+  bottom: 15px;
+  margin: 0 auto;
    border-bottom: 1px solid #D1D1D1;
 }
 #surveymaker{
@@ -49,25 +35,13 @@ body {
   font-weight: bold;
   font-family: serif;
 }
-#login{
-  text-align: center;
-  font-size: 20px;
-}
-#not-registered{
-  text-align: center;
-  font-size: 12px;
-}
 #forgot{
-  display: inline-block;
-  align-content: flex-end;
-  font-size: 12px;
   color: grey;
 
 }
-.form-check-input{
-  text-align: left;
-}
+
 .app-name{
   position: relative;
-  bottom: 10px;
+  top: -30px;
+  margin: 0 auto;
 }
