@@ -4,9 +4,14 @@
  * and open the template in the editor.
  */
 package Servlets;
+import Entities.question;
+import Entities.survey;
+import Models.QuestionModel;
+import Models.SurveyModel;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -91,14 +96,21 @@ public void getSurveyForm(HttpServletRequest request, HttpServletResponse respon
 }
 
 
-public void addSurvey(HttpServletRequest request, HttpServletResponse response){
- 
+public void addSurvey(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException{
+           survey object = null;
+           question quesObject = null ;
+            
            String survey_title= request.getParameter("survey_title");
+           object.setTitle(survey_title);
+           
            int questions_count=Integer.parseInt(request.getParameter("questions_count"));
+       
            
            for(int i = 0 ; i < questions_count ; i++){
               String question_type= request.getParameter("question"+(i+1)+"_type"); 
               String question_content= request.getParameter("question"+(i+1)+"_content"); 
+              quesObject.setContent(question_content);
+              
               
               if (question_type.equalsIgnoreCase("mcq")||question_type.equalsIgnoreCase("checkbox")){
                   
@@ -111,8 +123,10 @@ public void addSurvey(HttpServletRequest request, HttpServletResponse response){
               }
 
            }
+           SurveyModel.saveSurvey(object);
+           QuestionModel.savequestion(quesObject);
             
-           
+      
     }
 
 }
