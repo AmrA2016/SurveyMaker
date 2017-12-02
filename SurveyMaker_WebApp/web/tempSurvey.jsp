@@ -18,7 +18,7 @@
     <body>
      
   
-        <form method="post" action="SurveyServlet">
+        <form method="post" action="/SurveyServlet">
             <table border="0" cellpadding="2" cellspacing="2">
                 <tr>
                     <td>title</td>
@@ -28,10 +28,7 @@
                     <td>Number Of Questions</td>
                     <td><input type="text" name="questions_count"></td>   
                 </tr>
-                <% 
-                    int questions_count=(int)request.getAttribute("questions_count"); 
-                    for(int i=0; i<questions_count; i++){ 
-                %>
+               
                 <tr>
                    <td>Question Type</td>
                    <td><input type="text" name="question_type"></td>   
@@ -41,31 +38,49 @@
                    <td><input type="text" name="question_content"></td>   
                 </tr>
                     
-                 <% String question_type=(String)request.getAttribute("question_type"); 
-                     if (question_type.equalsIgnoreCase("mcq")|| question_type.equalsIgnoreCase("checkbbox")){
-                      
-                         %>
                 <tr>
                    <td>Number of options for the question</td>
                    <td><input type="text" name="question_options_count"></td>   
                 </tr>
-                    
-                <%  
-                    int question_options_count=(int)request.getAttribute("question_options_count");
-                    for (int j =0; j<question_options_count; j++){
-                        %>
+
                 <tr>
                    <td>Question Options</td>
                    <td><input type="text" name="question_option"></td>   
                 </tr>  
-                
-                <%      
-                    }
-                     }
-                   }
-                
-                %>
-              
+                 <tr>
+                   <td>Question Options</td>
+                   <td><input type="text" name="question_option"></td>   
+                </tr>  
+             <tr>
+                   <td>Question Type</td>
+                   <td><input type="text" name="question_type"></td>   
+                </tr>
+                <tr>
+                   <td>Question Content</td>
+                   <td><input type="text" name="question_content"></td>   
+                </tr>
+                    
+                <tr>
+                   <td>Number of options for the question</td>
+                   <td><input type="text" name="question_options_count"></td>   
+                </tr>
+
+                <tr>
+                   <td>Question Options</td>
+                   <td><input type="text" name="question_option"></td>   
+                </tr>  
+                 <tr>
+                   <td>Question Options</td>
+                   <td><input type="text" name="question_option"></td>   
+                </tr>  
+                <tr>
+                   <td>Question Options</td>
+                   <td><input type="text" name="question_option"></td>   
+                </tr> 
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" name="submit"></td>   
+                </tr>
 
             </table>
         </form>

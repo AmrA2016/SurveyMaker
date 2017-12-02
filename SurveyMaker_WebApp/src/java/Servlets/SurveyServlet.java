@@ -85,6 +85,10 @@ public class SurveyServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+public void getSurveyForm(HttpServletRequest request, HttpServletResponse response){
+    addSurvey(request, response);
+}
+
 
 public void addSurvey(HttpServletRequest request, HttpServletResponse response){
  
@@ -104,7 +108,10 @@ public void addSurvey(HttpServletRequest request, HttpServletResponse response){
                       String question_option= request.getParameter("question_option"); 
                   }
               }
-           }       
+
+           }
+            
+           
     }
 
 }
