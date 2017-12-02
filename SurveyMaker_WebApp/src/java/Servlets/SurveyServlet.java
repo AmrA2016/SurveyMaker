@@ -85,8 +85,9 @@ public class SurveyServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-public void getSurveyForm(HttpServletRequest request, HttpServletResponse response){
-    addSurvey(request, response);
+public void getSurveyForm(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    
+    response.sendRedirect("getSurveyForm.html");
 }
 
 
@@ -96,16 +97,16 @@ public void addSurvey(HttpServletRequest request, HttpServletResponse response){
            int questions_count=Integer.parseInt(request.getParameter("questions_count"));
            
            for(int i = 0 ; i < questions_count ; i++){
-              String question_type= request.getParameter("question_type"); 
-              String question_content= request.getParameter("question_content"); 
+              String question_type= request.getParameter("question"+(i+1)+"_type"); 
+              String question_content= request.getParameter("question"+(i+1)+"_content"); 
               
               if (question_type.equalsIgnoreCase("mcq")||question_type.equalsIgnoreCase("checkbox")){
                   
-                  int question_options_count=Integer.parseInt(request.getParameter("question_options_count"));
+                  int question_options_count=Integer.parseInt(request.getParameter("question"+(i+1)+"_options_count"));
                   
                   for(int j = 0 ; j < question_options_count ; j++){
                       
-                      String question_option= request.getParameter("question_option"); 
+                      String question_option= request.getParameter("question"+(i+1)+"_option"+(i+1)+""); 
                   }
               }
 
