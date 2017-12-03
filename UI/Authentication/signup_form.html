@@ -20,30 +20,33 @@
          <div class = "survey-maker">
            <h4>Sign-up to Survey Maker</h4>
          </div>
-        <form name="signup_form" onsubmit="return validation()">
+        <form name="form"  onsubmit="event.preventDefault(); validation();">
               <div class="form-group">
                 <label class= "form-text" for="exampleInputFirstName1">First Name</label>
-                <input type="text" class="form-control" id="exampleInputFirstName1" name="firstName">
+                <input type="text" class="form-control" id="exampleInputFirstName1" name="firstName" required>
               </div>
               <div class="form-group">
                 <label class= "form-text" for="exampleInputLastName1">Last Name</label>
-                <input type="text" class="form-control" id="exampleInputLastName1" name="lastName">
+                <input type="text" class="form-control" id="exampleInputLastName1" name="lastName"  required>
               </div>
               <div class="form-group">
                 <label class= "form-text" for="exampleInputEmail1">Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email"  required>
+                <div id="emailmsg" style = "color:Red; display:none"><p style="font-size: 12px;">Not a valid e-mail address!</p></div>
               </div>
               <div class="form-group">
                 <label class="form-text" for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control form-text" id="exampleInputPassword1" name="password1">
+                <input type="password" class="form-control form-text" id="exampleInputPassword1" name="password1"  required>
               </div>
               <div class="form-group">
                 <label class="form-text" for="exampleInputPassword1">Re-enter password</label>
-                <input type="password" class="form-control form-text" id="exampleInputPassword1" name="password2">
+                <input type="password" class="form-control form-text" id="exampleInputPassword1" name="password2"  required>
+                <div id="passwordmsg" style = "color:Red; display:none"><p style="font-size: 12px;">password must be the same!</p></div>
               </div>
               <div class="form-group">
                 <label class= "form-text" for="exampleInputMobile1">Mobile number</label>
-                <input type="tel" class="form-control" id="exampleInputMobile1" name="mobile">
+                <input type="tel" class="form-control" id="exampleInputMobile1" name="mobile"  required>
+                <div id="mobilemsg" style = "color:Red; display:none"><p style="font-size: 12px;">value must be numeric only!</p></div>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
@@ -70,5 +73,5 @@
   </body>
   <script src="../Global/js/jquery.js"></script>
   <script src="../Global/js/bootstrap.js"></script>
-  <script src="js/signup_validation.js"></script>
+  <script src="js/form_validation.js"></script>
 </html>
