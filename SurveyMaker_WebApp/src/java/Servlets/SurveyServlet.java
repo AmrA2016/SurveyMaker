@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package Servlets;
-import Entities.question;
-import Entities.survey;
+import Entities.Question;
+import Entities.Survey;
 import Models.QuestionModel;
 import Models.SurveyModel;
 
@@ -97,8 +97,8 @@ public void getSurveyForm(HttpServletRequest request, HttpServletResponse respon
 
 
 public void addSurvey(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException{
-           survey object = null;
-           question quesObject = null ;
+           Survey object = null;
+           Question quesObject = null ;
             
            String survey_title= request.getParameter("survey_title");
            object.setTitle(survey_title);
