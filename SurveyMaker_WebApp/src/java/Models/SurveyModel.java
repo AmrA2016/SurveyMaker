@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Models;
-import Entities.survey;
+import Entities.Survey;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,12 +23,12 @@ public class SurveyModel {
      * @throws java.sql.SQLException
      */
     
-    public static long saveSurvey(survey obj) throws ClassNotFoundException, SQLException{
+    public static long saveSurvey(Survey obj) throws ClassNotFoundException, SQLException{
         long id = 0;
          Class.forName("com.mysql.jdbc.Driver");
          Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root","") ;
          Statement stmt=(Statement) con.createStatement();
-         stmt.executeUpdate("INSERT INTO survey VALUES('"+obj.getTitle()+"','"+obj.getUrl()+"','"+obj.getCreationDate()+"','"+obj.getSuspended()+"','"+obj.getUserID()+"')");
+         stmt.executeUpdate("INSERT INTO survey VALUES('"+obj.getTitle()+"','"+obj.getCreationDate()+"','"+obj.isSuspended()+"','"+obj.getCreator_id()+"')");
          
         // stmt.execute("SELECT ID AS LastID FROM survey WHERE ID ='"+ @@Identity+"'");
          con.close();
