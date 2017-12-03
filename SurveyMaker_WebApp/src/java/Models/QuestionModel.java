@@ -7,7 +7,7 @@ package Models;
 
 import Entities.question;
 import Entities.survey;
-import java.beans.Statement;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -23,7 +23,7 @@ public class QuestionModel {
          Class.forName("com.mysql.jdbc.Driver");
          Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root","") ;
          Statement stmt=(Statement) con.createStatement();
-         stmt.executeUpdate("INSERT INTO question VALUES('"+obj.getContent()+"')");
+         stmt.executeUpdate("INSERT INTO question(content) VALUES('"+obj.getContent()+"')");
          
          con.close();
          

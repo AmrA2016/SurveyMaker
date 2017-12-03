@@ -7,7 +7,7 @@ package Models;
 
 import Entities.mcq;
 import Entities.open_question;
-import java.beans.Statement;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
