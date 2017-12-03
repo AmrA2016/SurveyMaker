@@ -7,7 +7,7 @@ function validateemail() {
         return false;
     }
     else {
-      document.getElementById("emailmsg").style.display="none";
+
       return true;
     }
 };
@@ -39,9 +39,13 @@ function validateNumber() {
 
 function validation() {
 
-    validateemail();
-    validateNumber();
-    matchpass();
-
+  var mailIsValid =  validateemail();
+  var mobileIsValid =  validateNumber();
+  var passwordIsmatch =  matchpass();
+   if(mobileIsValid == false || mailIsValid == false || passwordIsmatch == false){
+     return false;
+   }else{
+     return true;
+   }
 
 }

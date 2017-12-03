@@ -20,7 +20,7 @@
            <h4>Login to Survey Maker</h4>
            <h6>Not registered yet?<a>sign up now</a></h6>
          </div>
-        <form name="form"  onsubmit="event.preventDefault(); validateemail();">
+        <form name="form"  onsubmit="return validateemail();">
               <div class="form-group">
                 <label class= "form-text" for="exampleInputEmail1">Email</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" name="email"  required>
