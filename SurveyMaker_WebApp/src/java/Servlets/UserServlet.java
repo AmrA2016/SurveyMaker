@@ -100,7 +100,15 @@ public class UserServlet extends HttpServlet {
     }
 
     private void register(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PrintWriter out = null;
+        try {
+            out = response.getWriter();
+            out.println("Registered");
+        } catch (IOException ex) {
+            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            out.close();
+        }
     }
 
     private void getLoginForm(HttpServletRequest request, HttpServletResponse response) {

@@ -39,9 +39,9 @@ function validateNumber() {
 
 function validation() {
 
-    validateemail();
-    validateNumber();
-    matchpass();
-
-
+    if(validateemail() && validateNumber() && matchpass())
+    {
+        document.getElementById("submit-btn").click();
+    }
+    
 }
