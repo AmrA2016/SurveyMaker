@@ -7,8 +7,11 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.*;
+import javax.mail.internet.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Amr
  */
-@WebServlet(name = "UserServlet", urlPatterns = {"/User_GetSignupForm","/User_Register","/User_GetLoginForm",
-                                    "/User_Login","/User_ForgetPassword","/User_ChangePassword","/User_VerifyAccount"})
+@WebServlet(name = "UserServlet", urlPatterns = {"/User_GetSignupForm", "/User_Register", "/User_GetLoginForm",
+    "/User_Login", "/User_ForgetPassword", "/User_ChangePassword", "/User_VerifyAccount"})
 public class UserServlet extends HttpServlet {
 
     /**
@@ -35,21 +38,22 @@ public class UserServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getServletPath();
-        
-        if(path.equals("/User_GetSignupForm"))
-            getSignupForm(request,response);
-        else if(path.equals("/User_Register"))
-            register(request,response);
-        else if(path.equals("/User_GetLoginForm"))
-            getLoginForm(request,response);
-        else if(path.equals("/User_Login"))
-            login(request,response);
-        else if(path.equals("/User_ForgetPassword"))
-            forgetPassword(request,response);
-        else if(path.equals("/User_ChangePassword"))
-            changePassword(request,response);
-        else if(path.equals("/User_VerifyAccount"))
-            verifyAccount(request,response);
+
+        if (path.equals("/User_GetSignupForm")) {
+            getSignupForm(request, response);
+        } else if (path.equals("/User_Register")) {
+            register(request, response);
+        } else if (path.equals("/User_GetLoginForm")) {
+            getLoginForm(request, response);
+        } else if (path.equals("/User_Login")) {
+            login(request, response);
+        } else if (path.equals("/User_ForgetPassword")) {
+            forgetPassword(request, response);
+        } else if (path.equals("/User_ChangePassword")) {
+            changePassword(request, response);
+        } else if (path.equals("/User_VerifyAccount")) {
+            verifyAccount(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -100,15 +104,17 @@ public class UserServlet extends HttpServlet {
     }
 
     private void register(HttpServletRequest request, HttpServletResponse response) {
+
         PrintWriter out = null;
         try {
             out = response.getWriter();
-            out.println("Registered");
         } catch (IOException ex) {
             Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            out.close();
         }
+
+        
+        
+
     }
 
     private void getLoginForm(HttpServletRequest request, HttpServletResponse response) {
@@ -130,5 +136,52 @@ public class UserServlet extends HttpServlet {
     private void verifyAccount(HttpServletRequest request, HttpServletResponse response) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    private boolean sendMail(String Reciever, String subject, String text){
+        
+        String username = "surveymaker.owner@gmail.com";
+        String password = "iaP@ssw0rd!";
+        
+        String from = "surveymaker.owner@gmail.com";
 
+        String to = Reciever;
+
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            // Create a default MimeMessage object.
+            MimeMessage message = new MimeMessage(session);
+
+            // Set From: header field of the header.
+            message.setFrom(new InternetAddress(from));
+
+            // Set To: header field of the header.
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+            // Set Subject: header field
+            message.setSubject(subject);
+
+            // Now set the actual message
+            message.setText(text);
+
+            // Send message
+            Transport.send(message);
+            return true;
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+            return false;
+        }
+    }
 }
