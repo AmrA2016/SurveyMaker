@@ -26,7 +26,7 @@
                     <div class="survey-maker">
                         <h4>Sign-up to Survey Maker</h4>
                     </div>
-                    <form id="signup-form" name="form" action="${pageContext.request.contextPath}/User_Register" method="post" >
+                    <form name="form" action="${pageContext.request.contextPath}/User_Register" method="post" onsubmit="return validation();">
                         <div class="form-group">
                             <label class="form-text" for="exampleInputFirstName1">First Name</label>
                             <input type="text" class="form-control" id="exampleInputFirstName1" name="firstName" required>
@@ -71,8 +71,7 @@
                             </div>
                         </div>
                         <br>
-                        <button onclick="validation();" type="button" class="btn btn-primary form-text pull-right">Sign Up</button>
-                        <input id="submit-btn" type="submit" hidden="hidden">
+                        <button type="submit" class="btn btn-primary form-text">Sign Up</button>
                     </form>
                 </div>
             </div>

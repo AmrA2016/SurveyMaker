@@ -130,7 +130,6 @@ public class UserServlet extends HttpServlet {
         String mobile = request.getParameter("mobile");
         
         if(UserModel.getByMail(email) != null){
-            System.out.println("Mail already exists");
             request.setAttribute("ExistMail", true);
             request.getRequestDispatcher("Authentication/signup_form.jsp").forward(request, response);
         }
@@ -140,7 +139,7 @@ public class UserServlet extends HttpServlet {
             String token = email + "_" + UUID.randomUUID();
             VerificationToken verification_token = new VerificationToken(token, user_id);
             VerificationTokenModel.save(verification_token);
-            String basePath = "http://localhost:8080/" + request.getContextPath();
+            String basePath = "http://localhost:8080" + request.getContextPath();
             String subject = "Survey Maker | Account Confirmation";
             String content = "Please open this link to verify your account:\n"
                             + basePath + "/User_VerifyAccount?token=" + token;
@@ -167,10 +166,20 @@ public class UserServlet extends HttpServlet {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void verifyAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String token = request.getParameter("token");
-        PrintWriter out = response.getWriter();
-        out.println(token);
+    private void verifyAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException, ServletException {
+        String token_text = request.getParameter("token");
+        
+        VerificationToken token = VerificationTokenModel.getByToken(token_text);
+        
+        if(token == null)
+            response.sendRedirect("invalid_link.jsp");
+        else{
+            int user_id = token.getUser_id();
+            UserModel.setVerified(user_id, true);
+            VerificationTokenModel.delete(token.getId());
+            request.setAttribute("JustVerified", true);
+            request.getRequestDispatcher("User/user_home.jsp").forward(request, response);
+        }
     }
     
     private boolean sendMail(String Reciever, String subject, String text){

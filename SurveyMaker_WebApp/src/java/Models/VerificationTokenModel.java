@@ -71,4 +71,47 @@ public class VerificationTokenModel {
         return token;
     }
     
+    public static VerificationToken getByToken(String token_text){
+        VerificationToken token = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root","") ;
+            Statement stmt=(Statement) con.createStatement();
+            
+            String query = "SELECT * FROM verfication_token WHERE token = '%s'";
+            
+            ResultSet rs = stmt.executeQuery(String.format(query, token_text));
+            
+            if(rs.next()){
+                token = new VerificationToken(rs.getInt(1), rs.getString(2),rs.getInt(3));
+                
+            }
+            
+            rs.close();
+            stmt.close();
+            con.close();
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return token;
+    }
+    
+    public static void delete(int token_id) throws ClassNotFoundException, SQLException{
+        
+         Class.forName("com.mysql.jdbc.Driver");
+         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root","") ;
+         Statement stmt=(Statement) con.createStatement();
+         String query = "DELETE FROM verfication_token WHERE id = '%s'";
+         stmt.executeUpdate(String.format(query, token_id));
+         
+         stmt.close();
+         
+         con.close();
+         
+    }
+    
 }

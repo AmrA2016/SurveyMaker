@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home | Survey Maker</title>
+        <title>Main Page | Survey Maker</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Global/css/bootstrap.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Authentication/css/LoginStyle.css">
     </head>
@@ -26,7 +26,7 @@
                         <h4>Login to Survey Maker</h4>
                         <h6>Not registered yet?<a href="${pageContext.request.contextPath}/User_GetSignupForm">sign up now</a></h6>
                     </div>
-                    <form name="form"  onsubmit="event.preventDefault(); validateemail();">
+                    <form name="form" action="${pageContext.request.contextPath}/Login" method="post" onsubmit="return validateemail();">
                         <div class="form-group">
                             <label class= "form-text" for="exampleInputEmail1">Email</label>
                             <input type="email" class="form-control" id="exampleInputEmail1" name="email"  required>
@@ -34,8 +34,8 @@
                         </div>
                         <div class="form-group">
                             <label class="form-text" for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control form-text" id="exampleInputPassword1" placeholder="">
-                            <a id="forgot" href="">forgot password?</a>
+                            <input type="password" class="form-control form-text" id="exampleInputPassword1" name="password" required="">
+                            <a id="forgot" href="${pageContext.request.contextPath}/getResetForm">forgot password?</a>
                         </div>
                         <button type="submit" class="btn btn-primary form-text">Login</button>
                     </form>
