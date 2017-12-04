@@ -111,7 +111,7 @@ public class AuthenticationServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -120,8 +120,8 @@ public class AuthenticationServlet extends HttpServlet {
         user = user_model.getByMail(email);
 
         if (user == null) {
-            
-            response.sendRedirect("Authentication/invalid_email.jsp");
+            request.setAttribute("InvalidMail", true);
+            request.getRequestDispatcher("Authentication/invalid_mail_or_password.jsp").forward(request, response);
 
         } else {
 
@@ -139,7 +139,8 @@ public class AuthenticationServlet extends HttpServlet {
 
             }else{
                 
-                response.sendRedirect("Authentication/invalid_password.jsp");
+                request.setAttribute("Invalidpassword", true);
+                request.getRequestDispatcher("Authentication/invalid_mail_or_password.jsp").forward(request, response);
                 
             }
         }
