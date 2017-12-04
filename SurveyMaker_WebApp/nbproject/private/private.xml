@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/CS_IS%20(1st%20Term)/IS%20Minor/Internet%20Application/Project/SurveyMaker/SurveyMaker_WebApp/web/Authentication/forget_password.jsp</file>
-            <file>file:/E:/CS_IS%20(1st%20Term)/IS%20Minor/Internet%20Application/Project/SurveyMaker/SurveyMaker_WebApp/src/java/Servlets/AuthenticationServlet.java</file>
-            <file>file:/E:/CS_IS%20(1st%20Term)/IS%20Minor/Internet%20Application/Project/SurveyMaker/SurveyMaker_WebApp/web/Authentication/invalid_mail_or_password.jsp</file>
+            <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/src/java/Entities/Question.java</file>
+            <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/src/java/Servlets/SurveyServlet.java</file>
+            <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/src/java/Models/QuestionModel.java</file>
+            <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/web/Survey/AddSurvey.jsp</file>
+            <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/src/java/Servlets/AuthenticationServlet.java</file>
         </group>
     </open-files>
 </project-private>

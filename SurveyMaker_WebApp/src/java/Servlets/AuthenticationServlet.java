@@ -27,6 +27,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -127,9 +128,13 @@ public class AuthenticationServlet extends HttpServlet {
 
             if (user.getPassword().equals(password)) {
                 if (user.isVerified() == true) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user_id", user.getId());
                     if (user.isAdmin() == true) {
+                        session.setAttribute("user_type", "admin");
                         response.sendRedirect("Admin/admin_home.jsp");
                     } else {
+                        session.setAttribute("user_type", "user");
                         response.sendRedirect("User/user_home.jsp");
                     }
                 }else{

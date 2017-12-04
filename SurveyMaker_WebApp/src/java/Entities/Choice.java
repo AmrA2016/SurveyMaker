@@ -9,25 +9,19 @@ package Entities;
  *
  * @author Amr
  */
-public class CheckboxQuestion extends Question {
+public class Choice {
     private int id;
+    private String content;
     private int question_id;
 
-    public CheckboxQuestion() {
-    }
-
-    public CheckboxQuestion(int id, int question_id) {
+    public Choice(int id, String content, int question_id) {
         this.id = id;
+        this.content = content;
         this.question_id = question_id;
     }
 
-    public CheckboxQuestion(int id, int question_id, String content, int survey_id) {
-        super(content, survey_id);
-        this.id = id;
-        this.question_id = question_id;
-    }
-
-    public CheckboxQuestion(int question_id) {
+    public Choice(String content, int question_id) {
+        this.content = content;
         this.question_id = question_id;
     }
 
@@ -39,6 +33,14 @@ public class CheckboxQuestion extends Question {
         this.id = id;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public int getQuestion_id() {
         return question_id;
     }
@@ -46,4 +48,7 @@ public class CheckboxQuestion extends Question {
     public void setQuestion_id(int question_id) {
         this.question_id = question_id;
     }
+            
+    
+    
 }

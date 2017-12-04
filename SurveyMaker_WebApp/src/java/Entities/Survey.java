@@ -32,10 +32,9 @@ public class Survey {
         this.creator_id = creator_id;
     }
 
-    public Survey(String title, String creationDate, boolean suspended, int creator_id) {
+    public Survey(String title, String creationDate, int creator_id) {
         this.title = title;
         this.creationDate = creationDate;
-        this.suspended = suspended;
         this.creator_id = creator_id;
     }
 

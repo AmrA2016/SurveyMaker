@@ -6,10 +6,10 @@
 package Models;
 
 import Entities.Question;
-import Entities.Survey;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -18,16 +18,25 @@ import java.sql.SQLException;
  */
 public class QuestionModel {
     
-     public static void savequestion(Question obj) throws ClassNotFoundException, SQLException{
-        long id = 0;
+     public static int save(Question obj) throws ClassNotFoundException, SQLException{
+        int id = -1;
          Class.forName("com.mysql.jdbc.Driver");
          Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root","") ;
          Statement stmt=(Statement) con.createStatement();
-         stmt.executeUpdate("INSERT INTO question(content) VALUES('"+obj.getContent()+"')");
+         String query = "INSERT INTO question(content,type,survey_id) VALUES('%s','%s','%s')";
+         stmt.executeUpdate(String.format(query, obj.getContent(),obj.getType(),obj.getSurvey_id())
+                            ,Statement.RETURN_GENERATED_KEYS);
          
-         con.close();
          
-       
+        ResultSet rs = stmt.getGeneratedKeys();
+        if (rs.next()) {
+            id = rs.getInt(1);
+        }
+        rs.close();
+         
+        con.close();
+         
+        return id;
     }
     
 }

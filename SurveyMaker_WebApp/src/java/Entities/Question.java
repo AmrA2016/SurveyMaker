@@ -12,22 +12,26 @@ package Entities;
 public class Question {
     private int id;
     private String content;
+    private String type;
     private int survey_id;
 
     public Question() {
         id = -1;
         content = "";
+        type = "";
         survey_id = -1;
     }
 
-    public Question(int id, String content, int survey_id) {
+    public Question(int id, String content,String type, int survey_id) {
         this.id = id;
         this.content = content;
+        this.type = type;
         this.survey_id = survey_id;
     }
 
-    public Question(String content, int survey_id) {
+    public Question(String content,String type, int survey_id) {
         this.content = content;
+        this.type = type;
         this.survey_id = survey_id;
     }
 
@@ -47,6 +51,14 @@ public class Question {
         this.content = content;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    
     public int getSurvey_id() {
         return survey_id;
     }

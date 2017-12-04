@@ -20,12 +20,13 @@
             if (justVerified != null && justVerified) {
         %>
         <div class="alert alert-success">
-            <h3>Your account is verified successfully</h3>
+            <p>Your account is verified successfully</p>
         </div>
         <%
             }
         %>
         
+        <a href="${pageContext.request.contextPath}/Survey_AddSurveyForm" class="btn btn-primary">Add Survey</a>
         <a href="${pageContext.request.contextPath}/Logout" class="btn btn-primary">Logout</a>
     </body>
     <script src="${pageContext.request.contextPath}/Global/js/jquery.js"></script>
