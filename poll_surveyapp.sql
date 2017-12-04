@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2017 at 10:32 AM
+-- Generation Time: Dec 04, 2017 at 08:58 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -40,35 +40,12 @@ CREATE TABLE `answer` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `checkbox`
---
-
-CREATE TABLE `checkbox` (
-  `ID` int(11) NOT NULL,
-  `question_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `choice`
 --
 
 CREATE TABLE `choice` (
   `ID` int(10) NOT NULL,
   `content` varchar(1000) NOT NULL,
-  `mcq_id` int(11) DEFAULT NULL,
-  `checkbox_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `mcq`
---
-
-CREATE TABLE `mcq` (
-  `ID` int(11) NOT NULL,
   `question_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -98,23 +75,13 @@ CREATE TABLE `notification_user` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `open_question`
---
-
-CREATE TABLE `open_question` (
-  `ID` int(11) NOT NULL,
-  `question_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `question`
 --
 
 CREATE TABLE `question` (
   `ID` int(11) NOT NULL,
   `content` varchar(500) NOT NULL,
+  `type` varchar(50) NOT NULL,
   `survey_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -209,26 +176,11 @@ ALTER TABLE `answer`
   ADD KEY `answer_ibfk_1` (`survey_answer_id`);
 
 --
--- Indexes for table `checkbox`
---
-ALTER TABLE `checkbox`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `question_id` (`question_id`);
-
---
 -- Indexes for table `choice`
 --
 ALTER TABLE `choice`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `mcq_id` (`mcq_id`),
-  ADD KEY `choice_ibfk_1` (`checkbox_id`);
-
---
--- Indexes for table `mcq`
---
-ALTER TABLE `mcq`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `question_id` (`question_id`);
+  ADD KEY `mcq_id` (`question_id`);
 
 --
 -- Indexes for table `notification`
@@ -243,13 +195,6 @@ ALTER TABLE `notification_user`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `notification_user_ibfk_1` (`notification_id`);
-
---
--- Indexes for table `open_question`
---
-ALTER TABLE `open_question`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `question_id` (`question_id`);
 
 --
 -- Indexes for table `question`
@@ -305,22 +250,10 @@ ALTER TABLE `answer`
   MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `checkbox`
---
-ALTER TABLE `checkbox`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `choice`
 --
 ALTER TABLE `choice`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `mcq`
---
-ALTER TABLE `mcq`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `notification`
@@ -335,16 +268,10 @@ ALTER TABLE `notification_user`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `open_question`
---
-ALTER TABLE `open_question`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `report`
@@ -356,7 +283,7 @@ ALTER TABLE `report`
 -- AUTO_INCREMENT for table `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `survey_answer`
@@ -374,7 +301,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `verfication_token`
 --
 ALTER TABLE `verfication_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -388,23 +315,10 @@ ALTER TABLE `answer`
   ADD CONSTRAINT `fk_answer_question_id` FOREIGN KEY (`question_id`) REFERENCES `question` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `checkbox`
---
-ALTER TABLE `checkbox`
-  ADD CONSTRAINT `checkbox_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `question` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `choice`
 --
 ALTER TABLE `choice`
-  ADD CONSTRAINT `choice_ibfk_1` FOREIGN KEY (`checkbox_id`) REFERENCES `checkbox` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `choice_ibfk_2` FOREIGN KEY (`mcq_id`) REFERENCES `mcq` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `mcq`
---
-ALTER TABLE `mcq`
-  ADD CONSTRAINT `mcq_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `question` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_choice_questionid` FOREIGN KEY (`question_id`) REFERENCES `question` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `notification_user`
@@ -412,12 +326,6 @@ ALTER TABLE `mcq`
 ALTER TABLE `notification_user`
   ADD CONSTRAINT `notification_user_ibfk_1` FOREIGN KEY (`notification_id`) REFERENCES `notification` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `notification_user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `open_question`
---
-ALTER TABLE `open_question`
-  ADD CONSTRAINT `open_question_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `question` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `question`
