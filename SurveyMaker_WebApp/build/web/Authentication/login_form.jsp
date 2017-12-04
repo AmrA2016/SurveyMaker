@@ -1,9 +1,8 @@
 <%-- 
-    Document   : login_form
-    Created on : Dec 3, 2017, 8:03:09 PM
-    Author     : Amr
+    Document   : invalid_email
+    Created on : Dec 4, 2017, 4:21:41 PM
+    Author     : Manar Ashraf
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,13 +29,26 @@
                         <div class="form-group">
                             <label class= "form-text" for="exampleInputEmail1">Email</label>
                             <input type="email" class="form-control" id="exampleInputEmail1" name="email"  required>
-                            <div id="emailmsg" style = "color:Red; display:none"><p style="font-size: 12px;">Not a valid e-mail address!</p></div>
+                            <% Boolean invalidMail = (Boolean) request.getAttribute("InvalidMail");
+                               Boolean invalidpassword = (Boolean) request.getAttribute("Invalidpassword");
+                            if (invalidMail != null && invalidMail){ %>
+                            <div id="emailmsg" style = "color:Red; display:block"><p style="font-size: 12px;">Wrong e-mail address!</p></div>
+                          <% }
+                             %>
                         </div>
+                           
+                          
+                    
                         <div class="form-group">
                             <label class="form-text" for="exampleInputPassword1">Password</label>
                             <input type="password" class="form-control form-text" id="exampleInputPassword1" name="password" required="">
+                            <% if(invalidpassword != null && invalidpassword ){ %>
+                            <div style = "color:Red; display:block"><p style="font-size: 12px;">Wrong password!</p></div>
+                            <% }
+                            %>
                             <a id="forgot" href="${pageContext.request.contextPath}/getResetForm">forgot password?</a>
                         </div>
+                       
                         <button type="submit" class="btn btn-primary form-text">Login</button>
                     </form>
                 </div>

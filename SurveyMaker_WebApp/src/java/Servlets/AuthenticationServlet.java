@@ -121,7 +121,7 @@ public class AuthenticationServlet extends HttpServlet {
 
         if (user == null) {
             request.setAttribute("InvalidMail", true);
-            request.getRequestDispatcher("Authentication/invalid_mail_or_password.jsp").forward(request, response);
+            request.getRequestDispatcher("Authentication/login_form.jsp").forward(request, response);
 
         } else {
 
@@ -140,7 +140,7 @@ public class AuthenticationServlet extends HttpServlet {
             }else{
                 
                 request.setAttribute("Invalidpassword", true);
-                request.getRequestDispatcher("Authentication/invalid_mail_or_password.jsp").forward(request, response);
+                request.getRequestDispatcher("Authentication/login_form.jsp").forward(request, response);
                 
             }
         }
