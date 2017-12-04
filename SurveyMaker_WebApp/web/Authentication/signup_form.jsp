@@ -10,9 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sign-up form</title>
-        <link rel="stylesheet" href="../Global/css/bootstrap.css">
-        <link rel="stylesheet" href="css/LoginStyle.css">
-        <link rel="stylesheet" href="css/SignupStyle.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/Global/css/bootstrap.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/Authentication/css/LoginStyle.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/Authentication/css/SignupStyle.css">
     </head>
     <body>
         <div class="container">
@@ -38,6 +38,16 @@
                         <div class="form-group">
                             <label class="form-text" for="exampleInputEmail1">Email</label>
                             <input type="email" class="form-control" id="exampleInputEmail1" name="email" required>
+                            <%
+                                Boolean existmail = (Boolean)request.getAttribute("ExistMail");
+                                
+                                if(existmail != null && existmail)
+                                {
+                            %>
+                            <small class="text-danger">Email already exists</small>
+                            <%
+                                }
+                            %>
                             <div id="emailmsg" style="color:Red; display:none">
                                 <p style="font-size: 12px;">Not a valid e-mail address!</p>
                             </div>
@@ -72,7 +82,7 @@
     </body>
     
     
-    <script src="../Global/js/jquery.js"></script>
-    <script src="../Global/js/bootstrap.js"></script>
-    <script src="js/form_validation.js"></script>
+    <script src="${pageContext.request.contextPath}/Global/js/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/Global/js/bootstrap.js"></script>
+    <script src="${pageContext.request.contextPath}/Authentication/js/form_validation.js"></script>
 </html>

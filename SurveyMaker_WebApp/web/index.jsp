@@ -10,8 +10,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home | Survey Maker</title>
-        <link rel="stylesheet" href="Global/css/bootstrap.css">
-        <link rel="stylesheet" href="Authentication/css/LoginStyle.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/Global/css/bootstrap.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/Authentication/css/LoginStyle.css">
     </head>
     <body>
         <div class = "container">
@@ -46,9 +46,9 @@
         </div>
     </body>
     
-    <script src="Global/js/jquery.js"></script>
-    <script src="Global/js/bootstrap.js"></script>
-    <script src="Authentication/js/form_validation.js"></script>
+    <script src="${pageContext.request.contextPath}/Global/js/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/Global/js/bootstrap.js"></script>
+    <script src="${pageContext.request.contextPath}/Authentication/js/form_validation.js"></script>
     
     
 </html>

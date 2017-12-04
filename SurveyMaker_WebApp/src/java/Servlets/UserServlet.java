@@ -5,9 +5,15 @@
  */
 package Servlets;
 
+import Entities.User;
+import Entities.VerificationToken;
+import Models.UserModel;
+import Models.VerificationTokenModel;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.Properties;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.*;
@@ -36,7 +42,7 @@ public class UserServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         String path = request.getServletPath();
 
         if (path.equals("/User_GetSignupForm")) {
@@ -68,7 +74,13 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -82,7 +94,13 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -103,17 +121,33 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    private void register(HttpServletRequest request, HttpServletResponse response) {
-
-        PrintWriter out = null;
-        try {
-            out = response.getWriter();
-        } catch (IOException ex) {
-            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+    private void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException, SQLException {
+        
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password1");
+        String mobile = request.getParameter("mobile");
+        
+        if(UserModel.getByMail(email) != null){
+            System.out.println("Mail already exists");
+            request.setAttribute("ExistMail", true);
+            request.getRequestDispatcher("Authentication/signup_form.jsp").forward(request, response);
         }
-
-        
-        
+        else{
+            User user = new User(firstName,lastName,email,password,mobile);
+            int user_id = UserModel.save(user);
+            String token = email + "_" + UUID.randomUUID();
+            VerificationToken verification_token = new VerificationToken(token, user_id);
+            VerificationTokenModel.save(verification_token);
+            String basePath = "http://localhost:8080/" + request.getContextPath();
+            String subject = "Survey Maker | Account Confirmation";
+            String content = "Please open this link to verify your account:\n"
+                            + basePath + "/User_VerifyAccount?token=" + token;
+            sendMail(email, subject, content);
+            
+            response.sendRedirect("Authentication/confirm_account.jsp");
+        }
 
     }
 
@@ -133,8 +167,10 @@ public class UserServlet extends HttpServlet {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void verifyAccount(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void verifyAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String token = request.getParameter("token");
+        PrintWriter out = response.getWriter();
+        out.println(token);
     }
     
     private boolean sendMail(String Reciever, String subject, String text){
