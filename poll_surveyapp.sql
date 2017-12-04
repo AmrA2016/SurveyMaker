@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2017 at 06:55 PM
+-- Generation Time: Dec 04, 2017 at 10:32 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -114,7 +114,8 @@ CREATE TABLE `open_question` (
 
 CREATE TABLE `question` (
   `ID` int(11) NOT NULL,
-  `content` varchar(500) NOT NULL
+  `content` varchar(500) NOT NULL,
+  `survey_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -139,9 +140,8 @@ CREATE TABLE `report` (
 CREATE TABLE `survey` (
   `ID` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
-  `url` varchar(100) NOT NULL,
   `creationDate` varchar(100) NOT NULL,
-  `suspended` tinyint(1) NOT NULL,
+  `suspended` tinyint(1) NOT NULL DEFAULT '0',
   `creator_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -169,11 +169,20 @@ CREATE TABLE `user` (
   `firstName` varchar(100) NOT NULL,
   `lastName` varchar(100) NOT NULL,
   `mail` varchar(100) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `mobileNumber` varchar(100) NOT NULL,
-  `type` varchar(100) NOT NULL,
-  `suspended` tinyint(1) NOT NULL,
-  `verified` tinyint(1) NOT NULL
+  `admin` tinyint(1) NOT NULL DEFAULT '0',
+  `suspended` tinyint(1) NOT NULL DEFAULT '0',
+  `verified` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`ID`, `firstName`, `lastName`, `mail`, `password`, `mobileNumber`, `admin`, `suspended`, `verified`) VALUES
+(6, 'Amr', 'Atef', 'amr.atef96@hotmail.com', 'abc123', '0111333456', 0, 0, 1),
+(8, 'Muhamed', 'Ahmed', 'muhamed@gmail.com', '123456', '123456', 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -246,7 +255,8 @@ ALTER TABLE `open_question`
 -- Indexes for table `question`
 --
 ALTER TABLE `question`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `survey_id` (`survey_id`);
 
 --
 -- Indexes for table `report`
@@ -281,6 +291,7 @@ ALTER TABLE `user`
 -- Indexes for table `verfication_token`
 --
 ALTER TABLE `verfication_token`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -354,6 +365,18 @@ ALTER TABLE `survey_answer`
   MODIFY `ID` int(100) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `verfication_token`
+--
+ALTER TABLE `verfication_token`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -397,17 +420,23 @@ ALTER TABLE `open_question`
   ADD CONSTRAINT `open_question_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `question` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `question`
+--
+ALTER TABLE `question`
+  ADD CONSTRAINT `fk_question_surveyid` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `report`
 --
 ALTER TABLE `report`
   ADD CONSTRAINT `report_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `report_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `report_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `survey`
 --
 ALTER TABLE `survey`
-  ADD CONSTRAINT `survey_ibfk_1` FOREIGN KEY (`creator_id`) REFERENCES `user` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_survey_userid` FOREIGN KEY (`creator_id`) REFERENCES `user` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `survey_answer`
