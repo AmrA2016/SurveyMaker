@@ -37,7 +37,8 @@
     padding: 7px 12px;
     text-align: center;
     text-decoration: none;
-    display:inline;   
+    display:inline;
+    border-radius: 2px;
 }
 
 .linkOne:hover, a:active {
@@ -123,8 +124,7 @@ footer{
 	}
 
 #footerText{
-    text-align: left;
-    margin-left: 45%;
+    text-align: center;
     color:#fed929;
     font-size: 14;
     

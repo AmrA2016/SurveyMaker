@@ -16,7 +16,7 @@ body{
 
 .form-header{
     width: 100%;
-    background-color: rgb(103, 85, 252);
+    background-color: #0abab5;
     padding-top: 5px;
     padding-bottom: 1px;
     margin-bottom: 5px;
@@ -168,12 +168,12 @@ body{
 
 .form-footer .btn{
     width: 30%;
-    background-color: rgb(103, 85, 252);
+    background-color: #0abab5;
     color: white;
     font-size: 16px;
 }
 
 .form-footer .btn:hover{
-    background-color: rgb(90, 71, 252);
+    background-color: rgba(10, 186, 181, 0.79);
 }
 
