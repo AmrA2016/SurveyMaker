@@ -6,17 +6,21 @@
 package Servlets;
 
 import Entities.Choice;
+import Entities.Notification;
 import Entities.Question;
 import Entities.Survey;
 import Models.ChoiceModel;
+import Models.NotificationModel;
 import Models.QuestionModel;
 import Models.SurveyModel;
+import Models.UserModel;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +35,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author DELL
  */
-@WebServlet(name = "SurveyServlet", urlPatterns = {"/Survey_AddSurveyForm","/Survey_AddSurvey"})
+@WebServlet(name = "SurveyServlet", urlPatterns = {"/Survey_AddSurveyForm","/Survey_AddSurvey" , "/Survey_SuspendSurvey" , "/Survey_UnSuspendSurvey" , "/Survey_RemoveSurvey" , "/Survey_ReportSurvey"})
 public class SurveyServlet extends HttpServlet {
 
     /**
@@ -51,6 +55,14 @@ public class SurveyServlet extends HttpServlet {
                getSurveyForm(request, response);
            else if(path.equals("/Survey_AddSurvey"))
                addSurvey(request, response);
+           else if(path.equals("/Survey_SuspendSurvey"))
+               suspendSurvey(request, response);
+           else if(path.equals("/Survey_UnSuspendSurvey"))
+               unSuspendSurvey(request, response);
+           else if(path.equals("/Survey_RemoveSurvey"))
+               removeSurvey(request, response);
+           else if(path.equals("/Survey_ReportSurvey"))
+               reportSurvey(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -112,6 +124,83 @@ public class SurveyServlet extends HttpServlet {
         else{
             response.sendRedirect("Survey/AddSurvey.jsp");
         }
+        
+    }
+    
+    public String removeSurvey(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException {
+        HttpSession session = request.getSession();
+        Integer user_id = (Integer)session.getAttribute("user_id");
+        String result = "non";
+        if(user_id == null)
+            response.sendRedirect(request.getContextPath());
+        else{
+            Integer surveyID = Integer.parseInt(request.getParameter("serveyID"));
+            result = SurveyModel.remove(surveyID);
+        }
+        
+        return result;
+        
+    }
+    
+    public void reportSurvey(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException {
+        HttpSession session = request.getSession();
+        Integer user_id = (Integer)session.getAttribute("user_id");
+        if(user_id == null)
+            response.sendRedirect(request.getContextPath());
+        else{
+            Integer surveyID = Integer.parseInt(request.getParameter("serveyID"));
+            String reportContent = request.getParameter("reportContent");
+            
+            //create report record
+            response.getWriter().print(surveyID);
+            int result = SurveyModel.report(reportContent,surveyID,user_id);
+            response.getWriter().print(result);
+            
+            //create notification record
+            Notification notification = new Notification("user with id = " + user_id + " report the survey with id = " + surveyID + " because : "+ reportContent);
+            NotificationModel NotificationModel = new NotificationModel();
+            int notificationID = NotificationModel.save(notification);
+            
+            //Send notification to each admin
+            ArrayList<Integer> adminIDs = new ArrayList<Integer>();
+            adminIDs = UserModel.getAllAdmins();
+            for(int i=0 ; i<adminIDs.size(); i++){
+                UserModel.notify(adminIDs.get(i), notificationID);
+            }
+            
+            response.sendRedirect("User/user_home.jsp");
+            
+        }
+        
+    }
+    
+    public String suspendSurvey(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException {
+        HttpSession session = request.getSession();
+        Integer user_id = (Integer)session.getAttribute("user_id");
+        String result = "non";
+        if(user_id == null)
+            response.sendRedirect(request.getContextPath());
+        else{
+            Integer surveyID = Integer.parseInt(request.getParameter("serveyID"));
+            result = SurveyModel.susbend(surveyID);
+        }
+        
+        return result;
+        
+    }
+    
+    public String unSuspendSurvey(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException {
+        HttpSession session = request.getSession();
+        Integer user_id = (Integer)session.getAttribute("user_id");
+        String result = "non";
+        if(user_id == null)
+            response.sendRedirect(request.getContextPath());
+        else{
+            Integer surveyID = Integer.parseInt(request.getParameter("serveyID"));
+            result = SurveyModel.unSusbend(surveyID);
+        }
+        
+        return result;
         
     }
 

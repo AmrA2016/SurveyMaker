@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,6 +40,38 @@ public class UserModel {
         con.close();
 
         return id;
+    }
+    
+    public static void notify(int user_id, int notificationID) throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root", "");
+        Statement stmt = (Statement) con.createStatement();
+        String query = "INSERT INTO notification_user(user_id,notification_id) VALUES('%s','%s')";
+
+        stmt.executeUpdate(String.format(query, user_id, notificationID));
+
+        stmt.close();
+        con.close();
+
+    }
+    
+    public static ArrayList<Integer> getAllAdmins() throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root", "");
+        Statement stmt = (Statement) con.createStatement();
+        String query = "SELECT ID FROM user WHERE admin=1";
+        ResultSet RS = stmt.executeQuery(query);
+        
+        ArrayList<Integer> adminIDs = new ArrayList<Integer>();
+        while(RS.next()){
+            adminIDs.add(Integer.parseInt(RS.getString("ID")));
+        }
+        stmt.close();
+        con.close();
+        return adminIDs;
+
     }
 
     public static User getByID(int id) {
@@ -110,6 +143,20 @@ public class UserModel {
 
         stmt.executeUpdate(String.format(query, val, user_id));
 
+        stmt.close();
+        con.close();
+
+    }
+    
+    public static void changePasswrod(int user_id, String newPassword) throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root", "");
+        Statement stmt = (Statement) con.createStatement();
+        String query = "UPDATE user SET password = '%s' WHERE ID = '%s' ";
+
+        stmt.executeUpdate(String.format(query, newPassword, user_id));
+        
         stmt.close();
         con.close();
 
