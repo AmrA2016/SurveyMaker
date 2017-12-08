@@ -5,13 +5,16 @@
  */
 package Servlets;
 
+import Entities.Survey;
 import Entities.User;
 import Entities.VerificationToken;
+import Models.SurveyModel;
 import Models.UserModel;
 import Models.VerificationTokenModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -29,7 +32,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Amr
  */
-@WebServlet(name = "UserServlet", urlPatterns = {"/User_GetSignupForm", "/User_Register", "/User_VerifyAccount"})
+@WebServlet(name = "UserServlet", urlPatterns = {"/User_GetSignupForm", "/User_Register",
+    "/User_VerifyAccount", "/User_GetMySurveys"})
 public class UserServlet extends HttpServlet {
 
     /**
@@ -49,8 +53,10 @@ public class UserServlet extends HttpServlet {
             getSignupForm(request, response);
         } else if (path.equals("/User_Register")) {
             register(request, response);
-        }else if (path.equals("/User_VerifyAccount")) {
+        } else if (path.equals("/User_VerifyAccount")) {
             verifyAccount(request, response);
+        } else if (path.equals("/User_GetMySurveys")) {
+            getMySurveys(request, response);
         }
     }
 
@@ -114,19 +120,18 @@ public class UserServlet extends HttpServlet {
     }
 
     private void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException, SQLException {
-        
+
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
         String password = request.getParameter("password1");
         String mobile = request.getParameter("mobile");
-        
-        if(UserModel.getByMail(email) != null){
+
+        if (UserModel.getByMail(email) != null) {
             request.setAttribute("ExistMail", true);
             request.getRequestDispatcher("Authentication/signup_form.jsp").forward(request, response);
-        }
-        else{
-            User user = new User(firstName,lastName,email,password,mobile);
+        } else {
+            User user = new User(firstName, lastName, email, password, mobile);
             int user_id = UserModel.save(user);
             String token = email + "_" + UUID.randomUUID();
             VerificationToken verification_token = new VerificationToken(token, user_id);
@@ -134,9 +139,9 @@ public class UserServlet extends HttpServlet {
             String basePath = "http://localhost:8080" + request.getContextPath();
             String subject = "Survey Maker | Account Confirmation";
             String content = "Please open this link to verify your account:\n"
-                            + basePath + "/User_VerifyAccount?token=" + token;
+                    + basePath + "/User_VerifyAccount?token=" + token;
             sendMail(email, subject, content);
-            
+
             response.sendRedirect("Authentication/confirm_account.jsp");
         }
 
@@ -144,12 +149,12 @@ public class UserServlet extends HttpServlet {
 
     private void verifyAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException, ServletException {
         String token_text = request.getParameter("token");
-        
+
         VerificationToken token = VerificationTokenModel.getByToken(token_text);
-        
-        if(token == null)
+
+        if (token == null) {
             response.sendRedirect("invalid_link.jsp");
-        else{
+        } else {
             int user_id = token.getUser_id();
             UserModel.setVerified(user_id, true);
             VerificationTokenModel.delete(token.getId());
@@ -157,16 +162,27 @@ public class UserServlet extends HttpServlet {
             request.getRequestDispatcher(request.getContextPath() + "/Home").forward(request, response);
         }
     }
-    
-    private boolean sendMail(String Reciever, String subject, String text){
-        
+
+    private void getMySurveys(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession();
+        Integer user_id = (Integer)session.getAttribute("user_id");
+        if(user_id == null)
+            response.sendRedirect(request.getContextPath() + "/Home");
+        else{
+            ArrayList<Survey> surveys = SurveyModel.getByUserID(user_id);
+            request.setAttribute("Surveys", surveys);
+            request.getRequestDispatcher("User/MySurveys.jsp").forward(request, response);
+        }
+    }
+
+    private boolean sendMail(String Reciever, String subject, String text) {
+
         String username = "surveymaker.owner@gmail.com";
         String password = "iaP@ssw0rd!";
-        
+
         String from = "surveymaker.owner@gmail.com";
 
         String to = Reciever;
-
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -205,4 +221,5 @@ public class UserServlet extends HttpServlet {
             return false;
         }
     }
+
 }

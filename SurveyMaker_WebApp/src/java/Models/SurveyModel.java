@@ -96,6 +96,34 @@ public class SurveyModel {
         return "done";
     }
     
+    public static Survey getByID(int survey_id) {
+        Survey survey = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root", "");
+            Statement stmt = (Statement) con.createStatement();
+
+            String query = "SELECT * FROM survey WHERE id = '%s'";
+
+            ResultSet rs = stmt.executeQuery(String.format(query,survey_id));
+
+            if (rs.next()) {
+                survey = new Survey(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getInt(5));
+            }
+
+            rs.close();
+            stmt.close();
+            con.close();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return survey;
+    }
+    
     public static ArrayList<Survey> getAll() {
         ArrayList<Survey> surveys = new ArrayList<Survey>();
         try {
@@ -125,7 +153,7 @@ public class SurveyModel {
         return surveys;
     }
     
-    public static ArrayList<Survey> getAllByUserID(int user_id) {
+    public static ArrayList<Survey> getByUserID(int user_id) {
         ArrayList<Survey> surveys = new ArrayList<Survey>();
         try {
             Class.forName("com.mysql.jdbc.Driver");

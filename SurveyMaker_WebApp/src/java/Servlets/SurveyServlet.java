@@ -5,15 +5,20 @@
  */
 package Servlets;
 
+import Entities.Answer;
 import Entities.Choice;
 import Entities.Notification;
 import Entities.Question;
 import Entities.Report;
 import Entities.Survey;
+import Entities.SurveyAnswer;
+import Entities.User;
+import Models.AnswerModel;
 import Models.ChoiceModel;
 import Models.NotificationModel;
 import Models.QuestionModel;
 import Models.ReportModel;
+import Models.SurveyAnswerModel;
 import Models.SurveyModel;
 import Models.UserModel;
 
@@ -24,6 +29,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -38,7 +44,8 @@ import javax.servlet.http.HttpSession;
  * @author DELL
  */
 @WebServlet(name = "SurveyServlet", urlPatterns = {"/Survey_AddSurveyForm","/Survey_AddSurvey" , "/Survey_SuspendSurvey" , 
-                                                    "/Survey_UnSuspendSurvey" , "/Survey_RemoveSurvey" , "/Survey_ReportSurvey"})
+                                                    "/Survey_UnSuspendSurvey" , "/Survey_RemoveSurvey" , "/Survey_ReportSurvey"
+                                                   ,"/Survey_ViewSurvey","/Survey_SubmitAnswers"})
                                                     
 public class SurveyServlet extends HttpServlet {
 
@@ -67,6 +74,10 @@ public class SurveyServlet extends HttpServlet {
                removeSurvey(request, response);
            else if(path.equals("/Survey_ReportSurvey"))
                reportSurvey(request, response);
+           else if(path.equals("/Survey_ViewSurvey"))
+               viewSurvey(request,response);
+           else if(path.equals("/Survey_SubmitAnswers"))
+               submitAnswers(request,response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -199,7 +210,7 @@ public class SurveyServlet extends HttpServlet {
         if(user_id == null)
             response.sendRedirect(request.getContextPath() + "/Home");
         else{
-            Integer surveyID = Integer.parseInt(request.getParameter("serveyID"));
+            Integer surveyID = Integer.parseInt(request.getParameter("survey_id"));
             result = SurveyModel.unSuspend(surveyID);
         }
         
@@ -213,61 +224,133 @@ public class SurveyServlet extends HttpServlet {
         if(user_id == null)
             response.sendRedirect(request.getContextPath() + "/Home");
         else{
-            Survey survey = null;
-            Question quesObject = null;
-            Choice choice = null;
-
-            String survey_title = request.getParameter("survey_title");
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            Date date = new Date();
-            String creation_date = dateFormat.format(date);
-            survey = new Survey(survey_title,creation_date,user_id);
-            
-            int survey_id = SurveyModel.save(survey);
-            
-            int questions_count = Integer.parseInt(request.getParameter("questions_count"));
-
-            for (int i = 0; i < questions_count; i++) {
-                String question_type = request.getParameter("question" + (i + 1) + "_type");
-                String question_content = request.getParameter("question" + (i + 1) + "_content");
-                
-                
-                if (question_type.equalsIgnoreCase("mcq")) {
-                    
-                    quesObject = new Question(question_content,"mcq", survey_id);
-
-                    int question_id = QuestionModel.save(quesObject);
-                    
-                    int question_options_count = Integer.parseInt(request.getParameter("question" + (i + 1) + "_options_count"));
-
-                    for (int j = 0; j < question_options_count; j++) {
-
-                        String question_option = request.getParameter("question" + (i + 1) + "_option" + (j + 1) + "");
-                        choice = new Choice(question_option, question_id);
-                        ChoiceModel.save(choice);
-                    }
-                }
-                else if (question_type.equalsIgnoreCase("checkbox")) {
-                    
-                    quesObject = new Question(question_content,"checkbox", survey_id);
-                    int question_id = QuestionModel.save(quesObject);
-                    
-                    int question_options_count = Integer.parseInt(request.getParameter("question" + (i + 1) + "_options_count"));
-
-                    for (int j = 0; j < question_options_count; j++) {
-
-                        String question_option = request.getParameter("question" + (i + 1) + "_option" + (j + 1) + "");
-                        choice = new Choice(question_option, question_id);
-                        ChoiceModel.save(choice);
-                    }
-                }
-                else if(question_type.equalsIgnoreCase("open")){
-                    quesObject = new Question(question_content,"open", survey_id);
-                    QuestionModel.save(quesObject);
-                }
+            User user = UserModel.getByID(user_id);
+            if(user.isSuspended()){
+                response.sendRedirect(request.getContextPath() + "/Home");
             }
-            response.sendRedirect(request.getContextPath() + "/Home");
+            else{
+                Survey survey = null;
+                Question quesObject = null;
+                Choice choice = null;
 
+                String survey_title = request.getParameter("survey_title");
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                Date date = new Date();
+                String creation_date = dateFormat.format(date);
+                survey = new Survey(survey_title,creation_date,user_id);
+
+                int survey_id = SurveyModel.save(survey);
+
+                int questions_count = Integer.parseInt(request.getParameter("questions_count"));
+
+                for (int i = 0; i < questions_count; i++) {
+                    String question_type = request.getParameter("question" + (i + 1) + "_type");
+                    String question_content = request.getParameter("question" + (i + 1) + "_content");
+
+
+                    if (question_type.equalsIgnoreCase("mcq")) {
+
+                        quesObject = new Question(question_content,"mcq", survey_id);
+
+                        int question_id = QuestionModel.save(quesObject);
+
+                        int question_options_count = Integer.parseInt(request.getParameter("question" + (i + 1) + "_options_count"));
+
+                        for (int j = 0; j < question_options_count; j++) {
+
+                            String question_option = request.getParameter("question" + (i + 1) + "_option" + (j + 1) + "");
+                            choice = new Choice(question_option, question_id);
+                            ChoiceModel.save(choice);
+                        }
+                    }
+                    else if (question_type.equalsIgnoreCase("checkbox")) {
+
+                        quesObject = new Question(question_content,"checkbox", survey_id);
+                        int question_id = QuestionModel.save(quesObject);
+
+                        int question_options_count = Integer.parseInt(request.getParameter("question" + (i + 1) + "_options_count"));
+
+                        for (int j = 0; j < question_options_count; j++) {
+
+                            String question_option = request.getParameter("question" + (i + 1) + "_option" + (j + 1) + "");
+                            choice = new Choice(question_option, question_id);
+                            ChoiceModel.save(choice);
+                        }
+                    }
+                    else if(question_type.equalsIgnoreCase("open")){
+                        quesObject = new Question(question_content,"open", survey_id);
+                        QuestionModel.save(quesObject);
+                    }
+                }
+                response.sendRedirect(request.getContextPath() + "/Home");
+
+            }
+        }
+    }
+
+    private void viewSurvey(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession();
+        Integer user_id = (Integer)session.getAttribute("user_id");
+        if(user_id == null)
+            response.sendRedirect(request.getContextPath() + "/Home");
+        else{
+            int survey_id = Integer.parseInt(request.getParameter("survey_id"));
+            
+            Survey survey = SurveyModel.getByID(survey_id);
+            ArrayList<Question> questions = QuestionModel.getBySurveyID(survey_id);
+            HashMap<Integer,ArrayList<Choice> > questions_choices = new HashMap<>();
+            
+            for(int i = 0;i < questions.size();i++){
+                if(questions.get(i).getType().equals("open"))
+                    continue;
+                ArrayList<Choice> choices = ChoiceModel.getByQuestionID(questions.get(i).getId());
+                questions_choices.put(questions.get(i).getId(), choices);
+            }
+            
+            request.setAttribute("Survey", survey);
+            request.setAttribute("Questions", questions);
+            request.setAttribute("Questions_Choices", questions_choices);
+            
+            request.getRequestDispatcher("Survey/ViewSurvey.jsp").forward(request, response);
+        }
+    }
+
+    private void submitAnswers(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException {
+        HttpSession session = request.getSession();
+        Integer user_id = (Integer)session.getAttribute("user_id");
+        if(user_id == null)
+            response.sendRedirect(request.getContextPath() + "/Home");
+        else{
+            int survey_id = Integer.parseInt(request.getParameter("survey_id"));
+            int questions_count = Integer.parseInt(request.getParameter("questions_count"));
+            Boolean show_info = Boolean.parseBoolean(request.getParameter("show_info"));
+            
+            SurveyAnswer surveyAnswer = new SurveyAnswer(show_info, survey_id, user_id);
+            int survey_answer_id = SurveyAnswerModel.save(surveyAnswer);
+            
+            for(int i =0;i < questions_count;i++){
+                int question_id = Integer.parseInt(request.getParameter("question" + (i+1) + "_id"));
+                String question_type = request.getParameter("question" + (i+1) + "_type");
+                
+                String answerContent = "";
+                if(question_type.equals("checkbox")){
+                    int options_count = Integer.parseInt(request.getParameter("question"+(i+1)+"_options_count"));
+                    for (int j = 0; j < options_count; j++) {
+                        String temp = request.getParameter("question"+(i+1)+"_answer"+(j+1));
+                        if(temp != null)
+                            answerContent += temp + ",";
+                        
+                    }
+                }
+                else{
+                    answerContent = request.getParameter("question" + (i+1) + "_answer");
+                }
+                
+                Answer answer = new Answer(answerContent, question_id, survey_answer_id);
+                AnswerModel.save(answer);
+            }
+            
+            response.sendRedirect(request.getContextPath() + "/Home");
         }
     }
 
