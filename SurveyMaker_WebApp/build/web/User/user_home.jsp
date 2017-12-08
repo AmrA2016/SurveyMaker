@@ -4,6 +4,8 @@
     Author     : Amr
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="Entities.Survey"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

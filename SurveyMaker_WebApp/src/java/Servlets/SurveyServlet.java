@@ -8,10 +8,12 @@ package Servlets;
 import Entities.Choice;
 import Entities.Notification;
 import Entities.Question;
+import Entities.Report;
 import Entities.Survey;
 import Models.ChoiceModel;
 import Models.NotificationModel;
 import Models.QuestionModel;
+import Models.ReportModel;
 import Models.SurveyModel;
 import Models.UserModel;
 
@@ -35,7 +37,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author DELL
  */
-@WebServlet(name = "SurveyServlet", urlPatterns = {"/Survey_AddSurveyForm","/Survey_AddSurvey" , "/Survey_SuspendSurvey" , "/Survey_UnSuspendSurvey" , "/Survey_RemoveSurvey" , "/Survey_ReportSurvey"})
+@WebServlet(name = "SurveyServlet", urlPatterns = {"/Survey_AddSurveyForm","/Survey_AddSurvey" , "/Survey_SuspendSurvey" , 
+                                                    "/Survey_UnSuspendSurvey" , "/Survey_RemoveSurvey" , "/Survey_ReportSurvey"})
+                                                    
 public class SurveyServlet extends HttpServlet {
 
     /**
@@ -120,7 +124,7 @@ public class SurveyServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Integer user_id = (Integer)session.getAttribute("user_id");
         if(user_id == null)
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect(request.getContextPath() + "/Home");
         else{
             response.sendRedirect("Survey/AddSurvey.jsp");
         }
@@ -132,7 +136,7 @@ public class SurveyServlet extends HttpServlet {
         Integer user_id = (Integer)session.getAttribute("user_id");
         String result = "non";
         if(user_id == null)
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect(request.getContextPath() + "/Home");
         else{
             Integer surveyID = Integer.parseInt(request.getParameter("survey_id"));
             result = SurveyModel.remove(surveyID);
@@ -146,13 +150,14 @@ public class SurveyServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Integer user_id = (Integer)session.getAttribute("user_id");
         if(user_id == null)
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect(request.getContextPath() + "/Home");
         else{
             Integer surveyID = Integer.parseInt(request.getParameter("survey_id"));
             String reportContent = request.getParameter("report_content");
             
             //create report record
-            int result = SurveyModel.report(reportContent,surveyID,user_id);
+            Report report = new Report(reportContent,surveyID,user_id);
+            int result = ReportModel.save(report);
             
             //create notification record
             Notification notification = new Notification("user with id = " + user_id + " report the survey with id = " + surveyID + " because : "+ reportContent);
@@ -177,7 +182,7 @@ public class SurveyServlet extends HttpServlet {
         Integer user_id = (Integer)session.getAttribute("user_id");
         String result = "non";
         if(user_id == null)
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect(request.getContextPath() + "/Home");
         else{
             Integer surveyID = Integer.parseInt(request.getParameter("survey_id"));
             result = SurveyModel.suspend(surveyID);
@@ -192,7 +197,7 @@ public class SurveyServlet extends HttpServlet {
         Integer user_id = (Integer)session.getAttribute("user_id");
         String result = "non";
         if(user_id == null)
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect(request.getContextPath() + "/Home");
         else{
             Integer surveyID = Integer.parseInt(request.getParameter("serveyID"));
             result = SurveyModel.unSuspend(surveyID);
@@ -206,7 +211,7 @@ public class SurveyServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Integer user_id = (Integer)session.getAttribute("user_id");
         if(user_id == null)
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect(request.getContextPath() + "/Home");
         else{
             Survey survey = null;
             Question quesObject = null;
@@ -261,9 +266,10 @@ public class SurveyServlet extends HttpServlet {
                     QuestionModel.save(quesObject);
                 }
             }
-            response.sendRedirect("User/user_home.jsp");
+            response.sendRedirect(request.getContextPath() + "/Home");
 
         }
     }
+
 
 }

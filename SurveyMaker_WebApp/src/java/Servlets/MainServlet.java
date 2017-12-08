@@ -6,11 +6,14 @@
 package Servlets;
 
 import Entities.User;
+import Entities.Survey;
+import Models.SurveyModel;
 import Models.UserModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -22,6 +25,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,8 +37,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author Amr
  */
-@WebServlet(name = "AuthenticationServlet", urlPatterns = {"/Login", "/getResetForm", "/ResetPassword", "/Logout"})
-public class AuthenticationServlet extends HttpServlet {
+@WebServlet(name = "MainServlet", urlPatterns = {"/Home","/Login", "/getResetForm", "/ResetPassword",
+                                                            "/ChangePassword", "/Logout"})
+public class MainServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,10 +57,14 @@ public class AuthenticationServlet extends HttpServlet {
 
         if (path.equals("/Login")) {
             login(request, response);
-        } else if (path.equals("/getResetForm")) {
+        }else if(path.equals("/Home")){
+            getHome(request,response);
+        }else if (path.equals("/getResetForm")) {
             getResetPasswordForm(request, response);
         } else if (path.equals("/ResetPassword")) {
             resetPassword(request, response);
+        }  else if (path.equals("/ChangePassword")) {
+            changePassword(request, response);
         } else if (path.equals("/Logout")) {
             logout(request, response);
         }
@@ -76,9 +85,9 @@ public class AuthenticationServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AuthenticationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(AuthenticationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -96,9 +105,9 @@ public class AuthenticationServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AuthenticationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(AuthenticationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -111,7 +120,27 @@ public class AuthenticationServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
+    
+    private void getHome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Integer user_id = (Integer)session.getAttribute("user_id");
+        
+        if(user_id == null)
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        else{
+            String userType = (String) session.getAttribute("user_type");
+            ArrayList<Survey> surveys = SurveyModel.getAll();
+            request.setAttribute("Surveys", surveys);
+            if(userType.equals("admin")){
+                request.getRequestDispatcher("Admin/admin_home.jsp").forward(request, response);
+            }
+            else{
+                request.getRequestDispatcher("User/user_home.jsp").forward(request, response);
+            }
+        }
+    }
+    
     private void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         String email = request.getParameter("email");
@@ -132,11 +161,11 @@ public class AuthenticationServlet extends HttpServlet {
                     session.setAttribute("user_id", user.getId());
                     if (user.isAdmin() == true) {
                         session.setAttribute("user_type", "admin");
-                        response.sendRedirect("Admin/admin_home.jsp");
                     } else {
                         session.setAttribute("user_type", "user");
-                        response.sendRedirect("User/user_home.jsp");
                     }
+                    
+                    response.sendRedirect(request.getContextPath() + "/Home");
                 }else{
                     
                     response.sendRedirect("Authentication/confirm_account.jsp");
@@ -154,7 +183,7 @@ public class AuthenticationServlet extends HttpServlet {
 
     private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.getSession().invalidate();
-        response.sendRedirect(request.getContextPath());
+        response.sendRedirect(request.getContextPath() + "/Home");
     }
 
     private void getResetPasswordForm(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -178,10 +207,24 @@ public class AuthenticationServlet extends HttpServlet {
                     + "\nPassword: " + newPassword;
 
             sendMail(mail, subject, content);
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect(request.getContextPath() + "/Home");
         }
     }
-
+ 
+    private void changePassword(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException {
+        HttpSession session = request.getSession();
+        Integer user_id = (Integer)session.getAttribute("user_id");
+        if(user_id == null)
+            response.sendRedirect(request.getContextPath() + "/Home");
+        else{
+            String newPassword = (String) request.getParameter("new_password");
+            UserModel.changePasswrod(user_id, newPassword);
+            
+            String userType = (String) session.getAttribute("user_type");
+            response.sendRedirect(request.getContextPath() + "/Home");
+        }
+    } 
+    
     private boolean sendMail(String Reciever, String subject, String text) {
 
         String username = "surveymaker.owner@gmail.com";
@@ -228,4 +271,6 @@ public class AuthenticationServlet extends HttpServlet {
             return false;
         }
     }
+   
 }
+

@@ -29,8 +29,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Amr
  */
-@WebServlet(name = "UserServlet", urlPatterns = {"/User_GetSignupForm", "/User_Register", "/User_GetLoginForm",
-    "/User_Login", "/User_ForgetPassword", "/User_ChangePassword", "/User_VerifyAccount"})
+@WebServlet(name = "UserServlet", urlPatterns = {"/User_GetSignupForm", "/User_Register", "/User_VerifyAccount"})
 public class UserServlet extends HttpServlet {
 
     /**
@@ -50,15 +49,7 @@ public class UserServlet extends HttpServlet {
             getSignupForm(request, response);
         } else if (path.equals("/User_Register")) {
             register(request, response);
-        } else if (path.equals("/User_GetLoginForm")) {
-            getLoginForm(request, response);
-        } else if (path.equals("/User_Login")) {
-            login(request, response);
-        } else if (path.equals("/User_ForgetPassword")) {
-            forgetPassword(request, response);
-        } else if (path.equals("/User_ChangePassword")) {
-            changePassword(request, response);
-        } else if (path.equals("/User_VerifyAccount")) {
+        }else if (path.equals("/User_VerifyAccount")) {
             verifyAccount(request, response);
         }
     }
@@ -151,37 +142,6 @@ public class UserServlet extends HttpServlet {
 
     }
 
-    private void getLoginForm(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void login(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void forgetPassword(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void changePassword(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException {
-         HttpSession session = request.getSession();
-        Integer user_id = (Integer)session.getAttribute("user_id");
-        if(user_id == null)
-            response.sendRedirect(request.getContextPath());
-        else{
-            String newPassword = (String) request.getParameter("new_password");
-            UserModel.changePasswrod(user_id, newPassword);
-            
-            String userType = (String) session.getAttribute("user_type");
-            if(userType.equals("admin")){
-                response.sendRedirect("Admin/admin_home.jsp");
-            }
-            else{
-                response.sendRedirect("User/user_home.jsp");
-            }
-        }
-    }
-
     private void verifyAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException, ServletException {
         String token_text = request.getParameter("token");
         
@@ -194,7 +154,7 @@ public class UserServlet extends HttpServlet {
             UserModel.setVerified(user_id, true);
             VerificationTokenModel.delete(token.getId());
             request.setAttribute("JustVerified", true);
-            request.getRequestDispatcher("User/user_home.jsp").forward(request, response);
+            request.getRequestDispatcher(request.getContextPath() + "/Home").forward(request, response);
         }
     }
     
