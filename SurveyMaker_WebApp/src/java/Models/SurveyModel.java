@@ -65,12 +65,12 @@ public class SurveyModel {
         return id;
     }
     
-    public static String susbend(Integer surveyID) throws ClassNotFoundException, SQLException {
+    public static String suspend(Integer surveyID) throws ClassNotFoundException, SQLException {
         int id = 0;
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root", "");
         Statement stmt = (Statement) con.createStatement();
-        String query = "UPDATE survey SET suspended=1 WHERE id=%s";
+        String query = "UPDATE survey SET suspended=1 WHERE id='%s'";
         stmt.executeUpdate(String.format(query, surveyID) 
                 ,Statement.RETURN_GENERATED_KEYS);
         
@@ -81,12 +81,12 @@ public class SurveyModel {
         return "done";
     }
     
-    public static String unSusbend(Integer surveyID) throws ClassNotFoundException, SQLException {
+    public static String unSuspend(Integer surveyID) throws ClassNotFoundException, SQLException {
         int id = 0;
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root", "");
         Statement stmt = (Statement) con.createStatement();
-        String query = "UPDATE survey SET suspended=0 WHERE id=%s";
+        String query = "UPDATE survey SET suspended=0 WHERE id='%s'";
         stmt.executeUpdate(String.format(query, surveyID) 
                 ,Statement.RETURN_GENERATED_KEYS);
         
@@ -102,7 +102,7 @@ public class SurveyModel {
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root", "");
         Statement stmt = (Statement) con.createStatement();
-        String query = "DELETE from survey WHERE id=%s";
+        String query = "DELETE from survey WHERE id='%s'";
         stmt.executeUpdate(String.format(query, surveyID) 
                 ,Statement.RETURN_GENERATED_KEYS);
         

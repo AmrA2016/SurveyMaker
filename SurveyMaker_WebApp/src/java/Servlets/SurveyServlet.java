@@ -134,7 +134,7 @@ public class SurveyServlet extends HttpServlet {
         if(user_id == null)
             response.sendRedirect(request.getContextPath());
         else{
-            Integer surveyID = Integer.parseInt(request.getParameter("serveyID"));
+            Integer surveyID = Integer.parseInt(request.getParameter("survey_id"));
             result = SurveyModel.remove(surveyID);
         }
         
@@ -148,13 +148,11 @@ public class SurveyServlet extends HttpServlet {
         if(user_id == null)
             response.sendRedirect(request.getContextPath());
         else{
-            Integer surveyID = Integer.parseInt(request.getParameter("serveyID"));
-            String reportContent = request.getParameter("reportContent");
+            Integer surveyID = Integer.parseInt(request.getParameter("survey_id"));
+            String reportContent = request.getParameter("report_content");
             
             //create report record
-            response.getWriter().print(surveyID);
             int result = SurveyModel.report(reportContent,surveyID,user_id);
-            response.getWriter().print(result);
             
             //create notification record
             Notification notification = new Notification("user with id = " + user_id + " report the survey with id = " + surveyID + " because : "+ reportContent);
@@ -181,8 +179,8 @@ public class SurveyServlet extends HttpServlet {
         if(user_id == null)
             response.sendRedirect(request.getContextPath());
         else{
-            Integer surveyID = Integer.parseInt(request.getParameter("serveyID"));
-            result = SurveyModel.susbend(surveyID);
+            Integer surveyID = Integer.parseInt(request.getParameter("survey_id"));
+            result = SurveyModel.suspend(surveyID);
         }
         
         return result;
@@ -197,7 +195,7 @@ public class SurveyServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath());
         else{
             Integer surveyID = Integer.parseInt(request.getParameter("serveyID"));
-            result = SurveyModel.unSusbend(surveyID);
+            result = SurveyModel.unSuspend(surveyID);
         }
         
         return result;
