@@ -14,13 +14,15 @@
 #title{
     color:#fed929;
     background-color:#0abab5;
-    padding: 0px;
-    font-size: 15px;
     border: none;
     position: fixed;
-    left: 20%;
+    left: 7%;
     top: 0%;
     display:inline;
+    position: fixed;
+    padding: 8px;
+    font-size: 24;
+   
  
 }
 
