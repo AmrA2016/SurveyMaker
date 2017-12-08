@@ -1,0 +1,31 @@
+.main{
+  margin-top: 150px;
+  background-color: white;
+  margin-left: -20px;
+  width: 500px;
+  height: 300px;
+  text-align: center;
+  box-shadow: 2px 2px 10px grey;
+
+}
+.paragraph{
+  position: relative;
+  top: 100px;
+}
+body {
+  background: #EFF5FB; /* fallback for old browsers */
+  background: -moz-linear-gradient(#EFF5FB);
+}
+.app-name{
+  position: relative;
+  top: -30px;
+  margin: 0 auto;
+  width: 300px;
+  border-bottom: 1px solid #D1D1D1;
+}
+#surveymaker{
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: serif;
+}
