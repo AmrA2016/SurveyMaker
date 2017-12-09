@@ -45,7 +45,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "SurveyServlet", urlPatterns = {"/Survey_AddSurveyForm","/Survey_AddSurvey" , "/Survey_SuspendSurvey" , 
                                                     "/Survey_UnSuspendSurvey" , "/Survey_RemoveSurvey" , "/Survey_ReportSurvey"
-                                                   ,"/Survey_ViewSurvey","/Survey_SubmitAnswers"})
+                                                   ,"/Survey_ViewSurvey","/Survey_SubmitAnswers","/Survey_ViewStatistics"})
                                                     
 public class SurveyServlet extends HttpServlet {
 
@@ -78,6 +78,8 @@ public class SurveyServlet extends HttpServlet {
                viewSurvey(request,response);
            else if(path.equals("/Survey_SubmitAnswers"))
                submitAnswers(request,response);
+           else if(path.equals("/Survey_ViewStatistics"))
+               viewStatistics(request,response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -337,8 +339,13 @@ public class SurveyServlet extends HttpServlet {
                     int options_count = Integer.parseInt(request.getParameter("question"+(i+1)+"_options_count"));
                     for (int j = 0; j < options_count; j++) {
                         String temp = request.getParameter("question"+(i+1)+"_answer"+(j+1));
-                        if(temp != null)
-                            answerContent += temp + ",";
+                        if(temp != null){
+                            if(answerContent.isEmpty())
+                                answerContent += temp;
+                            else
+                                answerContent += "," + temp;
+                                        
+                        }
                         
                     }
                 }
@@ -351,6 +358,59 @@ public class SurveyServlet extends HttpServlet {
             }
             
             response.sendRedirect(request.getContextPath() + "/Home");
+        }
+    }
+
+    private void viewStatistics(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        Integer user_id = (Integer)session.getAttribute("user_id");
+        if(user_id == null)
+            response.sendRedirect(request.getContextPath() + "/Home");
+        else{
+            int survey_id = Integer.parseInt("survey_id");
+            
+            ArrayList<Question> questions = QuestionModel.getBySurveyID(survey_id);
+            
+            ArrayList<SurveyAnswer> survey_answers = SurveyAnswerModel.getBySurveyID(survey_id);
+            int totalNumberOfAnswers = survey_answers.size();
+            
+            HashMap<Integer,HashMap<String,Integer> > questions_answers = new HashMap<>();
+            
+            for (int i = 0; i < questions.size(); i++) {
+                HashMap<String, Integer> answers_count = new HashMap<>();
+                ArrayList<Answer> answers = AnswerModel.getByQuestionID(questions.get(i).getId());
+                
+                if(questions.get(i).getType().equals("checkbox") || 
+                        questions.get(i).getType().equals("mcq"))
+                {
+                    ArrayList<Choice> choices = ChoiceModel.getByQuestionID(questions.get(i).getId());
+                    
+                    for (int j = 0; j < choices.size(); j++) {
+                        answers_count.put(choices.get(j).getContent(), 0);
+                    }
+                }
+                
+                for (int j = 0; j < answers.size(); j++) 
+                {
+                    if(answers_count.containsKey(answers.get(j).getAnswerContent())){
+                        int old_count = answers_count.get(answers.get(j).getAnswerContent());
+                        answers_count.replace(answers.get(j).getAnswerContent(), old_count, old_count+1);
+                    }
+                    else{
+                        if(questions.get(i).getType().equals("checkbox")){
+                            String[] answer_parts = answers.get(j).getAnswerContent().split(",");
+                            for (int k = 0; k < answer_parts.length; k++) {
+                                int old_count = answers_count.get(answer_parts[k]);
+                                answers_count.replace(answer_parts[k], old_count, old_count+1);
+                            }
+                        }
+                        else
+                            answers_count.put(answers.get(j).getAnswerContent(), 1);
+                    }
+                }
+                
+                questions_answers.put(questions.get(i).getId(), answers_count);
+            }
         }
     }
 

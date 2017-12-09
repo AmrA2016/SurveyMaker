@@ -11,6 +11,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -39,5 +42,34 @@ public class SurveyAnswerModel {
         con.close();
 
         return id;
+    }
+    
+    public static ArrayList<SurveyAnswer> getBySurveyID(int survey_id) {
+        ArrayList<SurveyAnswer> surveyAnswers = new ArrayList<SurveyAnswer>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root", "");
+            Statement stmt = (Statement) con.createStatement();
+
+            String query = "SELECT * FROM survey_answer WHERE survey_id='%s'";
+
+            ResultSet rs = stmt.executeQuery(String.format(query, survey_id));
+
+            while (rs.next()) {
+                SurveyAnswer surveyAnswer = new SurveyAnswer(rs.getInt(1), rs.getBoolean(2),rs.getInt(3), rs.getInt(4));
+                surveyAnswers.add(surveyAnswer);
+            }
+
+            rs.close();
+            stmt.close();
+            con.close();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return surveyAnswers;
     }
 }
