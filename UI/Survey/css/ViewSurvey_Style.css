@@ -1,0 +1,60 @@
+.survey-container{
+    margin-top: 50px;
+}
+.survey-form{
+    background-color: white;
+    -webkit-box-shadow: 0px 5px 13px -4px rgba(0,0,0,0.65);
+    -moz-box-shadow: 0px 5px 13px -4px rgba(0,0,0,0.65);
+    box-shadow: 0px 5px 13px -4px rgba(0,0,0,0.65);
+}
+
+.form-header{
+    width: 100%;
+    background-color: #0abab5;
+    padding-top: 5px;
+    padding-bottom: 1px;
+    margin-bottom: 5px;
+}
+
+.form-header p{
+    color: white;
+    font-size: 30px;
+    text-shadow: 0px 1px #dbdcdd;
+    padding: 0;
+    
+}
+.form-body .form-group{
+    padding: 10px 30px ;
+}
+
+.survey-title{
+    font-size: 30px;
+    font-weight: 510;
+}
+.question-title {
+    font-size: 20px;
+    color: #383f50;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-left: 45px;
+}
+.answers {
+    font-size: 18px;
+    color: #383f50;
+    padding-left: 60px;
+    padding-top: 2px;
+    padding-bottom: 4px;
+}
+.submit-btn{
+    background-color: #0abab5;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+/*
+
+.form-body{
+    font-size: 30px;
+}
+*/

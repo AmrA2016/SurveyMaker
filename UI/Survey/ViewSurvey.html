@@ -7,6 +7,7 @@
     <title></title>
 
     <link href="../Global/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/ViewSurvey_Style.css">
 </head>
 
 <body>
@@ -17,7 +18,76 @@
 <script src="../Global/js/bootstrap.min.js"></script>
     
     
-    
+     <div class="survey-container row">
+        <div class="col-md-6 col-md-offset-3 ">
+            <div class="survey-form ">
+                <form>
+                    <div class="form-header text-center">
+                        <p>View Survey</p>
+                    </div>
+                    <div class="form-body">
+                        <div class="form-group">
+                            <p class="survey-title" name="survey_title" required>Survey Title</p>
+                        </div>
+                        <div>
+                            <h3 class="question-title">
+                              <p>MCQ Question</p>
+                            </h3>
+                            <div class="answers">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="mcq" value="a">a</label>  
+                                </div>  
+                                <div class="radio">
+                                      <label>
+                                          <input type="radio" name="mcq" value="b">b</label>  
+                                </div>
+                                <div class="radio">
+                                     <label>
+                                         <input type="radio" name="mcq" value="b">b</label>  
+                                </div>
+                            </div>
+                        </div> 
+                        <div>
+                            <h3 class="question-title">
+                              <p>True or False Question</p>
+                            </h3>
+                            <div class="answers">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="TorF" value="T">True</label>  
+                                </div>  
+                                <div class="radio">
+                                      <label>
+                                          <input type="radio" name="TorF" value="F">False</label>  
+                                </div>  
+                            </div>
+                        </div> 
+                        <div>
+                            <h3 class="question-title">
+                              <p>Open Question</p>
+                            </h3>
+                            <div class="answers">
+                                  <div class="form-group">                       
+                                        <label>
+                                        <textarea class="form-control" style="min-width: 70px;"></textarea>
+                                        </label>
+                                    </div>
+                            </div>
+                        </div> 
+                        <div class="form-footer text-center">
+                          <input type="submit" class="btn submit-btn" value="Submit Answers">
+                       </div>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                    
+                    
+                </form>
+            </div>
+        </div>
+    </div>
     
     
     
