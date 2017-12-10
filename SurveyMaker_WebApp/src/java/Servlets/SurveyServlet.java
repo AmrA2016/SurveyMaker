@@ -343,7 +343,7 @@ public class SurveyServlet extends HttpServlet {
                             if(answerContent.isEmpty())
                                 answerContent += temp;
                             else
-                                answerContent += "," + temp;
+                                answerContent += "|" + temp;
                                         
                         }
                         
@@ -392,13 +392,16 @@ public class SurveyServlet extends HttpServlet {
                 
                 for (int j = 0; j < answers.size(); j++) 
                 {
+                    if(answers.get(j).getAnswerContent().isEmpty())
+                        continue;
+                    
                     if(answers_count.containsKey(answers.get(j).getAnswerContent())){
                         int old_count = answers_count.get(answers.get(j).getAnswerContent());
                         answers_count.replace(answers.get(j).getAnswerContent(), old_count, old_count+1);
                     }
                     else{
                         if(questions.get(i).getType().equals("checkbox")){
-                            String[] answer_parts = answers.get(j).getAnswerContent().split(",");
+                            String[] answer_parts = answers.get(j).getAnswerContent().split("|");
                             for (int k = 0; k < answer_parts.length; k++) {
                                 int old_count = answers_count.get(answer_parts[k]);
                                 answers_count.replace(answer_parts[k], old_count, old_count+1);
