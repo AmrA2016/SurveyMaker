@@ -14,13 +14,18 @@
 
     <div class="survey-container row">
         <div class="col-md-6 col-md-offset-3 ">
-            <div class="survey-form ">
-                <form>
+            <div class="survey-form">
+                <form action="#" method="post">
                     <div class="form-header text-center">
                         <p>Survey Title</p>
                     </div>
                     <div class="form-body">
+                        <input type="number" name="questions_count" hidden="hidden">
                         <div class="question checkbox-question">
+                            <input type="number" name="question_id" hidden="hidden">
+                            <input type="text" name="question_type" hidden="hidden">
+                            <input type="number" name="question_options_count" hidden="hidden">
+
                             <h3 class="question-title">
                                 <p>Checkbox Question</p>
                             </h3>
@@ -46,6 +51,8 @@
                             </div>
                         </div>
                         <div class="question mcq-question">
+                            <input type="number" name="question_id" hidden="hidden">
+                            <input type="text" name="question_type" hidden="hidden">
                             <h3 class="question-title">
                                 <p>MCQ Question</p>
                             </h3>
@@ -64,7 +71,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="question open-question">
+                            <input type="number" name="question_id" hidden="hidden">
+                            <input type="text" name="question_type" hidden="hidden">
                             <h3 class="question-title">
                                 <p>Open Question</p>
                             </h3>
