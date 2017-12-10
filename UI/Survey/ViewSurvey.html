@@ -12,85 +12,85 @@
 
 <body>
 
-</body>
-
-<script src="../Global/js/jquery.min.js"></script>
-<script src="../Global/js/bootstrap.min.js"></script>
-    
-    
-     <div class="survey-container row">
+    <div class="survey-container row">
         <div class="col-md-6 col-md-offset-3 ">
             <div class="survey-form ">
                 <form>
                     <div class="form-header text-center">
-                        <p>View Survey</p>
+                        <p>Survey Title</p>
                     </div>
                     <div class="form-body">
-                        <div class="form-group">
-                            <p class="survey-title" name="survey_title">Survey Title</p>
+                        <div class="question checkbox-question">
+                            <h3 class="question-title">
+                                <p>Checkbox Question</p>
+                            </h3>
+                            <div class="answers">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="answer1" value="a">
+                                        a
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="answer2" value="b">
+                                        b
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="answer" value="c">
+                                        c
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question mcq-question">
+                            <h3 class="question-title">
+                                <p>MCQ Question</p>
+                            </h3>
+                            <div class="answers">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="TorF" value="T">
+                                        True
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                          <input class="form-check-input" type="radio" name="TorF" value="F">
+                                          False
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <div>
                             <h3 class="question-title">
-                              <p>MCQ Question</p>
+                                <p>Open Question</p>
                             </h3>
-                            <div class="answers">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="mcq" value="a">a</label>  
-                                </div>  
-                                <div class="radio">
-                                      <label>
-                                          <input type="radio" name="mcq" value="b">b</label>  
-                                </div>
-                                <div class="radio">
-                                     <label>
-                                         <input type="radio" name="mcq" value="b">b</label>  
+                            <div class="row">
+                                <div class="form-group col-md-10 col-md-offset-1">
+                                    <textarea class="form-control" style="min-width: 70px;" rows="3" placeholder="Enter your answer"></textarea>
                                 </div>
                             </div>
-                        </div> 
-                        <div>
-                            <h3 class="question-title">
-                              <p>True or False Question</p>
-                            </h3>
-                            <div class="answers">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="TorF" value="T">True</label>  
-                                </div>  
-                                <div class="radio">
-                                      <label>
-                                          <input type="radio" name="TorF" value="F">False</label>  
-                                </div>  
-                            </div>
-                        </div> 
-                        <div>
-                            <h3 class="question-title">
-                              <p>Open Question</p>
-                            </h3>
-                            <div class="answers">
-                                  <div class="form-group">                       
-                                        <label>
-                                        <textarea class="form-control" style="min-width: 70px;"></textarea>
-                                        </label>
-                                    </div>
-                            </div>
-                        </div> 
+                        </div>
                         <div class="form-footer text-center">
-                          <input type="submit" class="btn submit-btn" value="Submit Answers">
-                       </div>
-                        <br>
+                            <input type="submit" class="btn submit-btn" value="Submit Answers">
+                        </div>
                         <br>
                     </div>
-                    
-                    
+
+
                 </form>
             </div>
         </div>
     </div>
-    
-    
-    
-    
-    
-    
+
+</body>
+
+<script src="../Global/js/jquery.min.js"></script>
+<script src="../Global/js/bootstrap.min.js"></script>
+
+
+
 </html>

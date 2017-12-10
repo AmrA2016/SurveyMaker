@@ -1,5 +1,6 @@
 .survey-container{
     margin-top: 50px;
+    margin-bottom: 20px;
 }
 .survey-form{
     background-color: white;
@@ -39,7 +40,7 @@
     padding-left: 45px;
 }
 .answers {
-    font-size: 18px;
+    font-size: 16px;
     color: #383f50;
     padding-left: 60px;
     padding-top: 2px;
