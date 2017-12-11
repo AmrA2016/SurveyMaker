@@ -3,6 +3,21 @@ body {
     background-color: whitesmoke;
 }
 
+
+.survey-card {
+
+    position: relative;
+    height: 350px;
+    background-color: white;
+    border-bottom: 1px solid #D1D1D1;
+    border-radius: 5px;
+
+}
+
+.surveys-container{
+    margin-top: 60px;
+}
+
 .survey-header {
     position: relative;
     height: 60px;
@@ -62,14 +77,6 @@ body {
     margin-right: 8px;
 }
 
-.survey-card {
 
-    position: relative;
-    top: 100px;
-    height: 350px;
-    background-color: white;
-    border-bottom: 1px solid #D1D1D1;
-    border-radius: 5px;
 
-}
 
