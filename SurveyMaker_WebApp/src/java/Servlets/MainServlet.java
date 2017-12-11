@@ -7,6 +7,8 @@ package Servlets;
 
 import Entities.User;
 import Entities.Survey;
+import Entities.SurveyAnswer;
+import Models.SurveyAnswerModel;
 import Models.SurveyModel;
 import Models.UserModel;
 import java.io.IOException;
@@ -14,6 +16,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -130,8 +133,20 @@ public class MainServlet extends HttpServlet {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         else{
             String userType = (String) session.getAttribute("user_type");
-            ArrayList<Survey> surveys = SurveyModel.getAll();
-            request.setAttribute("Surveys", surveys);
+            ArrayList<Survey> all_surveys = SurveyModel.getAll();
+            ArrayList<Survey> other_surveys = new ArrayList<>();
+            HashMap<Integer,Integer> responses_count = new HashMap<>();
+            for(int i =0;i < all_surveys.size();i++)
+            {
+                if(all_surveys.get(i).getCreator_id() != user_id){
+                    other_surveys.add(all_surveys.get(i));
+                    ArrayList<SurveyAnswer> survey_answers = SurveyAnswerModel.getBySurveyID(all_surveys.get(i).getId());
+                    responses_count.put(all_surveys.get(i).getId(), survey_answers.size());
+                }
+            }
+            
+            request.setAttribute("Surveys", other_surveys);
+            request.setAttribute("ResponsesCount", responses_count);
             if(userType.equals("admin")){
                 request.getRequestDispatcher("Admin/admin_home.jsp").forward(request, response);
             }
