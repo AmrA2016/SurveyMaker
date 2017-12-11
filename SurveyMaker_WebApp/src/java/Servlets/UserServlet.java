@@ -180,7 +180,9 @@ public class UserServlet extends HttpServlet {
                 responses_count.put(surveys.get(i).getId(), survey_answers.size());
             }
             request.setAttribute("Surveys", surveys);
-            request.getRequestDispatcher("User/MySurveys.jsp").forward(request, response);
+            request.setAttribute("ResponsesCount", responses_count);
+            
+            request.getRequestDispatcher("User/user_surveys.jsp").forward(request, response);
         }
     }
 
