@@ -6,8 +6,10 @@
 package Servlets;
 
 import Entities.Survey;
+import Entities.SurveyAnswer;
 import Entities.User;
 import Entities.VerificationToken;
+import Models.SurveyAnswerModel;
 import Models.SurveyModel;
 import Models.UserModel;
 import Models.VerificationTokenModel;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -170,6 +173,12 @@ public class UserServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/Home");
         else{
             ArrayList<Survey> surveys = SurveyModel.getByUserID(user_id);
+            HashMap<Integer,Integer> responses_count = new HashMap<>();
+            
+            for(int i =0;i < surveys.size();i++){
+                ArrayList<SurveyAnswer> survey_answers = SurveyAnswerModel.getBySurveyID(surveys.get(i).getId());
+                responses_count.put(surveys.get(i).getId(), survey_answers.size());
+            }
             request.setAttribute("Surveys", surveys);
             request.getRequestDispatcher("User/MySurveys.jsp").forward(request, response);
         }
