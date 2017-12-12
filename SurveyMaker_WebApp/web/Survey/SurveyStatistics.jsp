@@ -125,10 +125,7 @@
                             title: "Count"
                     },
                     data: [{        
-                            type: "column",  
-                            showInLegend: false, 
-                            legendMarkerColor: "grey",
-                            legendText: "MMbbl = one million barrels",
+                            type: "column",
                             dataPoints: <%= data_points %>
                         }]
                 });
