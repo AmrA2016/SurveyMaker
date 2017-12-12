@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2017 at 08:58 PM
+-- Generation Time: Dec 12, 2017 at 09:39 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -37,6 +37,15 @@ CREATE TABLE `answer` (
   `survey_answer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `answer`
+--
+
+INSERT INTO `answer` (`ID`, `answerContent`, `question_id`, `survey_answer_id`) VALUES
+(1, 'Yes', 2, 1),
+(2, 'Games|Swimming', 3, 1),
+(3, 'Any text', 4, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -48,6 +57,19 @@ CREATE TABLE `choice` (
   `content` varchar(1000) NOT NULL,
   `question_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `choice`
+--
+
+INSERT INTO `choice` (`ID`, `content`, `question_id`) VALUES
+(1, 'Option1', 1),
+(2, 'Option2', 1),
+(3, 'Yes', 2),
+(4, 'No', 2),
+(5, 'Games', 3),
+(6, 'Swimming', 3),
+(7, 'Reading', 3);
 
 -- --------------------------------------------------------
 
@@ -85,6 +107,16 @@ CREATE TABLE `question` (
   `survey_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `question`
+--
+
+INSERT INTO `question` (`ID`, `content`, `type`, `survey_id`) VALUES
+(1, 'Question 1', 'mcq', 1),
+(2, 'Graduated?', 'mcq', 4),
+(3, 'Your Hobbies ?', 'checkbox', 4),
+(4, 'Tell us about your project you made.', 'open', 4);
+
 -- --------------------------------------------------------
 
 --
@@ -112,6 +144,14 @@ CREATE TABLE `survey` (
   `creator_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `survey`
+--
+
+INSERT INTO `survey` (`ID`, `title`, `creationDate`, `suspended`, `creator_id`) VALUES
+(1, 'Survey 1', '2017/12/08 20:26:39', 0, 6),
+(4, 'Survey 2', '2017/12/10 06:13:28', 0, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -124,6 +164,13 @@ CREATE TABLE `survey_answer` (
   `survey_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `survey_answer`
+--
+
+INSERT INTO `survey_answer` (`ID`, `ShowInfo`, `survey_id`, `user_id`) VALUES
+(1, 0, 4, 6);
 
 -- --------------------------------------------------------
 
@@ -247,7 +294,7 @@ ALTER TABLE `verfication_token`
 -- AUTO_INCREMENT for table `answer`
 --
 ALTER TABLE `answer`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `choice`
@@ -289,7 +336,7 @@ ALTER TABLE `survey`
 -- AUTO_INCREMENT for table `survey_answer`
 --
 ALTER TABLE `survey_answer`
-  MODIFY `ID` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`

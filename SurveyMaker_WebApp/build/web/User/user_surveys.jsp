@@ -62,9 +62,6 @@
                                 <a class="view-survey" href=<% out.print(request.getContextPath() + "/Survey_ViewSurvey?survey_id=" + surveys.get(i).getId()); %> title="View survey">
                                     <i class="fa fa-eye fa-lg icon" aria-hidden="true"></i>
                                 </a>
-                                <a class="report-survey" href="#" title="Report survey">
-                                    <i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i>
-                                </a>
                                 <a class="view-stat" href=<% out.print(request.getContextPath() + "/Survey_ViewStatistics?survey_id=" + surveys.get(i).getId()); %> title="View survey statistics">
                                     <i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i>
                                 </a>
