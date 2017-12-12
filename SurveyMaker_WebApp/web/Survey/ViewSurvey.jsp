@@ -62,7 +62,7 @@
                                     <div class="form-check">
                                         <label class="form-check-label">
                                             <input class="form-check-input" type="checkbox" name=<% out.print("question" + (i+1) + "_answer" +(j+1)); %> 
-                                                   value=<%= choices.get(j).getContent() %>>
+                                                   value=<%= choices.get(j).getContent() %> <% if(survey.isSuspended()) out.print("disabled"); %> >
                                             <%= choices.get(j).getContent() %>
                                         </label>
                                     </div>
@@ -93,7 +93,7 @@
                                     <div class="form-check">
                                         <label class="form-check-label">
                                             <input class="form-check-input" type="radio" name=<% out.print("question" + (i+1) + "_answer"); %> 
-                                                   value=<%= choices.get(j).getContent() %> required>
+                                                   value=<%= choices.get(j).getContent() %> required <% if(survey.isSuspended()) out.print("disabled"); %>>
                                             <%= choices.get(j).getContent() %>
                                         </label>
                                     </div>
@@ -120,7 +120,8 @@
                                     <div class="form-group col-md-10 col-md-offset-1">
                                         <textarea class="form-control" style="min-width: 70px;" 
                                                   rows="3" placeholder="Enter your answer" 
-                                                  name=<% out.print("question" + (i+1) + "_answer"); %> required></textarea>
+                                                  name=<% out.print("question" + (i+1) + "_answer"); %> required 
+                                                  <% if(survey.isSuspended()) out.print("disabled"); %> ></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -137,7 +138,9 @@
                             </div>
                             <br>
                             <div class="form-footer text-center">
+                                <% if(!survey.isSuspended()) {%>
                                 <input type="submit" class="btn submit-btn" value="Submit Answers">
+                                <% } %>
                             </div>
                             <br>
                         </div>
