@@ -361,14 +361,15 @@ public class SurveyServlet extends HttpServlet {
         }
     }
 
-    private void viewStatistics(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void viewStatistics(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
         Integer user_id = (Integer)session.getAttribute("user_id");
         if(user_id == null)
             response.sendRedirect(request.getContextPath() + "/Home");
         else{
-            int survey_id = Integer.parseInt("survey_id");
+            int survey_id = Integer.parseInt(request.getParameter("survey_id"));
             
+            Survey survey = SurveyModel.getByID(survey_id);
             ArrayList<Question> questions = QuestionModel.getBySurveyID(survey_id);
             
             ArrayList<SurveyAnswer> survey_answers = SurveyAnswerModel.getBySurveyID(survey_id);
@@ -401,7 +402,7 @@ public class SurveyServlet extends HttpServlet {
                     }
                     else{
                         if(questions.get(i).getType().equals("checkbox")){
-                            String[] answer_parts = answers.get(j).getAnswerContent().split("|");
+                            String[] answer_parts = answers.get(j).getAnswerContent().split("\\|");
                             for (int k = 0; k < answer_parts.length; k++) {
                                 int old_count = answers_count.get(answer_parts[k]);
                                 answers_count.replace(answer_parts[k], old_count, old_count+1);
@@ -414,6 +415,12 @@ public class SurveyServlet extends HttpServlet {
                 
                 questions_answers.put(questions.get(i).getId(), answers_count);
             }
+            request.setAttribute("Survey", survey);
+            request.setAttribute("SurveyAnswer", survey_answers);
+            request.setAttribute("Questions", questions);
+            request.setAttribute("QuestionAnswers", questions_answers);
+            
+            request.getRequestDispatcher("Survey/SurveyStatistics.jsp").forward(request, response);
         }
     }
 
