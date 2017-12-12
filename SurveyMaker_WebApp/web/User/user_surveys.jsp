@@ -29,7 +29,7 @@
                     for (int i = 0; i < surveys.size(); i++) 
                     {
                 %>
-                <div class="col-lg-3">
+                <div id="survey-<%out.print(surveys.get(i).getId());%>" class="col-md-3">
                     <div class="survey-card">
                         <input type="number" class="survey-id" value=<%= surveys.get(i).getId() %> hidden>
                         <div class="survey-header">
@@ -46,11 +46,11 @@
                                 <%
                                     if(surveys.get(i).isSuspended()){
                                 %>
-                                <input class="suspend-survey" type="checkbox">   
+                                <input id="suspend-survey-<%out.print(surveys.get(i).getId());%>" class="suspend-survey" onclick="suspendSurvey(<%out.print(surveys.get(i).getId());%>)" type="checkbox">   
                                 <%
                                     } else{
                                 %>
-                                <input class="suspend-survey" type="checkbox" checked>
+                                <input id="suspend-survey-<%out.print(surveys.get(i).getId());%>" class="suspend-survey" onclick="suspendSurvey(<%out.print(surveys.get(i).getId());%>)" type="checkbox" checked="checked">
                                 <%
                                     }
                                 %>
@@ -65,10 +65,11 @@
                                 <a class="view-stat" href=<% out.print(request.getContextPath() + "/Survey_ViewStatistics?survey_id=" + surveys.get(i).getId()); %> title="View survey statistics">
                                     <i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i>
                                 </a>
-                                <a class="del-survey" href="#" title="Delete survey">
+                                    <a class="del-survey" href="#" onclick="deleteSurvey(<%out.print(surveys.get(i).getId());%>)" title="Delete survey">
                                     <i class="fa fa-times fa-lg icon" aria-hidden="true"></i>
                                 </a>
                             </div>
+                                    <div id="response" class="text-center"></div>
                         </div>
                     </div>
                 </div>
@@ -83,4 +84,47 @@
     </body>
     <script src="${pageContext.request.contextPath}/Global/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/Global/js/bootstrap.js"></script>
+    <script>
+        function deleteSurvey(id) {
+            var xhttp = new XMLHttpRequest();
+            
+            xhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+               document.getElementById("response").innerHTML = this.responseText;
+               document.getElementById("survey-"+id).style.display = 'none';
+              }
+            };
+            xhttp.open("GET", '/SurveyMaker_WebApp/Survey_RemoveSurvey?survey_id='+id, true);
+            xhttp.send();
+          }
+          
+          function suspendSurvey(id) {
+              if(document.getElementById("suspend-survey-"+id).checked == false){
+                  var xhttp = new XMLHttpRequest();
+            
+                    xhttp.onreadystatechange = function() {
+                      if (this.readyState == 4 && this.status == 200) {
+                       document.getElementById("response").innerHTML = this.responseText;
+                      }
+                    };
+                    xhttp.open("GET", '/SurveyMaker_WebApp/Survey_SuspendSurvey?survey_id='+id, true);
+                    xhttp.send();
+              }
+              
+              else{
+                  var xhttp = new XMLHttpRequest();
+            
+                    xhttp.onreadystatechange = function() {
+                      if (this.readyState == 4 && this.status == 200) {
+                       document.getElementById("response").innerHTML = this.responseText;
+                      }
+                    };
+                    xhttp.open("GET", '/SurveyMaker_WebApp/Survey_UnSuspendSurvey?survey_id='+id, true);
+                    xhttp.send();
+              }
+            
+          }
+                  
+          
+    </script>
 </html>
