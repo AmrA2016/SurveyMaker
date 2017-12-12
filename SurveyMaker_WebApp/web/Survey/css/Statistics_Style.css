@@ -5,6 +5,7 @@ body{
 
 .survey-container{
     margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .survey-stat{
@@ -30,3 +31,10 @@ body{
     
 }
 
+.stat-body{
+    padding: 10px;
+}
+
+thead{
+    background-color: whitesmoke;
+}

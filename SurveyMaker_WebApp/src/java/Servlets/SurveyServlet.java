@@ -416,7 +416,7 @@ public class SurveyServlet extends HttpServlet {
                 questions_answers.put(questions.get(i).getId(), answers_count);
             }
             request.setAttribute("Survey", survey);
-            request.setAttribute("SurveyAnswer", survey_answers);
+            request.setAttribute("SurveyAnswers", survey_answers);
             request.setAttribute("Questions", questions);
             request.setAttribute("QuestionAnswers", questions_answers);
             
