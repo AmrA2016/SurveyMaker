@@ -5,10 +5,12 @@
  */
 package Servlets;
 
+import Entities.Notification;
 import Entities.Survey;
 import Entities.SurveyAnswer;
 import Entities.User;
 import Entities.VerificationToken;
+import Models.NotificationModel;
 import Models.SurveyAnswerModel;
 import Models.SurveyModel;
 import Models.UserModel;
@@ -36,7 +38,7 @@ import javax.servlet.http.HttpSession;
  * @author Amr
  */
 @WebServlet(name = "UserServlet", urlPatterns = {"/User_GetSignupForm", "/User_Register",
-    "/User_VerifyAccount", "/User_GetMySurveys"})
+    "/User_VerifyAccount", "/User_GetMySurveys" , "/User_sendMessage"})
 public class UserServlet extends HttpServlet {
 
     /**
@@ -60,6 +62,8 @@ public class UserServlet extends HttpServlet {
             verifyAccount(request, response);
         } else if (path.equals("/User_GetMySurveys")) {
             getMySurveys(request, response);
+        }else if (path.equals("/User_sendMessage")) {
+            sendMessage(request, response);
         }
     }
 
@@ -185,7 +189,41 @@ public class UserServlet extends HttpServlet {
             request.getRequestDispatcher("User/user_surveys.jsp").forward(request, response);
         }
     }
-
+    
+    private void sendMessage(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException, ServletException {
+         HttpSession session = request.getSession();
+        Integer user_id = (Integer)session.getAttribute("user_id");
+        
+        
+        if(user_id == null)
+            response.sendRedirect(request.getContextPath() + "/Home");
+         else {
+            
+            String target = request.getParameter("target");
+            String messageContent = request.getParameter("message_content");
+            Notification notification = new Notification(messageContent);
+            NotificationModel NotificationModel = new NotificationModel();
+            
+            int notificationID = NotificationModel.save(notification);
+            
+            ArrayList<Integer> targetIDs = new ArrayList<Integer>();
+            if(target.equals("allUsers")){
+                targetIDs = UserModel.getAllNormalUsers();
+            }
+            else{
+                targetIDs.add(Integer.parseInt(target));
+            }
+            
+            for(int i=0 ; i<targetIDs.size();i++){
+                UserModel.notify(targetIDs.get(i), notificationID);
+            }
+            
+            response.sendRedirect(request.getContextPath() + "/Home");
+            //response.getWriter().print("hi");
+            
+        }
+    }
+    
     private boolean sendMail(String Reciever, String subject, String text) {
 
         String username = "surveymaker.owner@gmail.com";
