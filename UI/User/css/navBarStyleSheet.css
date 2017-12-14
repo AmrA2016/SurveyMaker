@@ -28,9 +28,7 @@ i , .caret{
 .navbar-brand:hover{
     color: #ffffff;
 }
- i:hover , .badge-notify:hover , .caret:hover{
-    color:black;
-}
+
 .linkOne{
     position: fixed;
     left: -130%;

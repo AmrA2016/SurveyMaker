@@ -1,46 +1,55 @@
 <html>
-    <head>
-         <link rel="stylesheet" href="css/navBarStyleSheet.css">  
+	<head>
+		<link rel="stylesheet" href="../Global/css/bootstrap.css">              
+		<link rel="stylesheet" href="../Global/css/font-awesome.css">              
+		<script src="../Global/js/jquery.js"></script>
+		<script src="../Global/js/bootstrap.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
-    
-    <body>
-
-    <div id="navBar">
-    
-        <button id="title">
-           <b>Survey Maker</b>
-        </button>
-    
-    
-        <button class="notifications">
-          <i class="fa fa-bell"></i>   
-        </button>
-
-    
-     <div class="dropdown">
-        <button class="dropbtn">
-            <i class="fa fa-odnoklassniki"></i>
-            <i class="fa fa-caret-down"></i>   
-        </button>
+        <link rel="stylesheet" href="css/navBarStyleSheet.css">
+		
+	</head>
+	<body>
+        
+        <nav class="navbar navbar-fixed-top">    
+            <div class="container-fluid">
+                <div class="navbar-header ">        
+                    <a href="#" class="navbar-brand">Survey Maker</a>    
+                </div>
+                
+                <ul class="nav navbar-nav navbar-right">             
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle notifications" data-toggle="dropdown">
+                            <i class="fa fa-bell"></i><span class="badge badge-notify">5</span>                               
+                        </a>                 
+                        <ul class="dropdown-menu">          
+                            <li><a href="#">N1</a></li>
+                            <li><a href="#">N2</a></li>
+                            <li><a href="#">N3</a></li>
+                        </ul>
+                    </li>
  
-        <div class="dropdown-content">
-          <a href="#" target="_self">Change Password</a>
-          <a href="#" target="_self">View Users</a>
-          <a href="#" target="_self">Logout</a>
-        </div>
-     </div>
-
-    </div>
-    
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle info" data-toggle="dropdown">
+                            <i class="fa fa-odnoklassniki"></i>
+                            <span class="caret"></span>                                
+                        </a>                 
+                        <ul class="dropdown-menu">          
+                            <li><a href="#">Change Password</a></li>
+                            <li><a href="#">View Users</a></li>
+                            <li><a href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            
+            </div>
+        </nav>
+        
       <footer>
           <p id="footerText">© 2017 Survey Maker | Terms of Service </p>
           <p id="footerText"> All Rights Reserved | Privacy Policy</p>
-          
         </footer>
+        
     </body>
-    
-    
 </html>
-
-	
