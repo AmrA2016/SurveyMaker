@@ -56,6 +56,42 @@ public class UserModel {
 
     }
     
+    public static ArrayList<Integer> getAllNormalUsers() throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root", "");
+        Statement stmt = (Statement) con.createStatement();
+        String query = "SELECT ID FROM user WHERE admin=0";
+        ResultSet RS = stmt.executeQuery(query);
+        
+        ArrayList<Integer> usersIDs = new ArrayList<Integer>();
+        while(RS.next()){
+            usersIDs.add(Integer.parseInt(RS.getString("ID")));
+        }
+        stmt.close();
+        con.close();
+        return usersIDs;
+
+    }
+    
+    public static ArrayList<String> getAllNormalUsersMails() throws ClassNotFoundException, SQLException {
+        
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root", "");
+        Statement stmt = (Statement) con.createStatement();
+        String query = "SELECT mail FROM user WHERE admin=0";
+        ResultSet RS = stmt.executeQuery(query);
+        
+        ArrayList<String> usersMails = new ArrayList<String>();
+        while(RS.next()){
+            usersMails.add(RS.getString("mail"));
+        }
+        stmt.close();
+        con.close();
+        return usersMails;
+
+    }
+    
     public static ArrayList<Integer> getAllAdmins() throws ClassNotFoundException, SQLException {
 
         Class.forName("com.mysql.jdbc.Driver");
