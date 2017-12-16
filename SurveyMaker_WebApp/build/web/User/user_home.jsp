@@ -20,7 +20,7 @@
     </head>
     <body>
         <jsp:include page="../Global/navbar.jsp" />
-        
+
         <%
             Boolean justVerified = (Boolean) request.getAttribute("JustVerified");
 
@@ -33,50 +33,53 @@
         <%
             }
         %>
-        
-        <div class="container surveys-container">
-            <div class="row">
-                <%
-                    ArrayList<Survey> surveys = (ArrayList<Survey>)request.getAttribute("Surveys");
-                    HashMap<Integer,Integer> responses_count = (HashMap<Integer, Integer>)request.getAttribute("ResponsesCount");
-                    
-                    for (int i = 0; i < surveys.size(); i++) 
-                    {
-                %>
-                <div class="col-lg-3">
-                    <div class="survey-card">
-                        <input type="number" class="survey-id" value=<%= surveys.get(i).getId() %> hidden>
-                        <div class="survey-header">
-                            <h3 class="survey-name"> <%= surveys.get(i).getTitle() %> </h3>
-                        </div>
-                        <div class="responses">
-                            <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 
-                                <%= responses_count.get(surveys.get(i).getId()) %>
-                                <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5>
-                            </span>
-                        </div>
-                        
-                        <div class="survey-footer">
-                            <div class="icons">
-                                <a class="view-survey" href=<% out.print(request.getContextPath() + "/Survey_ViewSurvey?survey_id=" + surveys.get(i).getId()); %> title="View survey">
-                                    <i class="fa fa-eye fa-lg icon" aria-hidden="true"></i>
-                                </a>
-                                <a class="report-survey" href="#" title="Report survey">
-                                    <i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i>
-                                </a>
+
+        <div class="wrapper">
+            <div class="container surveys-container">
+                <div class="row">
+                    <%
+                        ArrayList<Survey> surveys = (ArrayList<Survey>) request.getAttribute("Surveys");
+                        HashMap<Integer, Integer> responses_count = (HashMap<Integer, Integer>) request.getAttribute("ResponsesCount");
+
+                        for (int i = 0; i < surveys.size(); i++) {
+                    %>
+                    <div class="col-lg-3">
+                        <div class="survey-card">
+                            <input type="number" class="survey-id" value=<%= surveys.get(i).getId()%> hidden>
+                            <div class="survey-header">
+                                <h3 class="survey-name"> <%= surveys.get(i).getTitle()%> </h3>
+                            </div>
+                            <div class="responses">
+                                <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 
+                                    <%= responses_count.get(surveys.get(i).getId())%>
+                                    <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5>
+                                </span>
+                            </div>
+
+                            <div class="survey-footer">
+                                <div class="icons">
+                                    <a class="view-survey" href=<% out.print(request.getContextPath() + "/Survey_ViewSurvey?survey_id=" + surveys.get(i).getId()); %> title="View survey">
+                                       <i class="fa fa-eye fa-lg icon" aria-hidden="true"></i>
+                                    </a>
+                                    <a class="report-survey" href="#" title="Report survey">
+                                        <i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <%
+                        }
+                    %>
+
+
+
                 </div>
-                <%            
-                    }
-                %>
-                
-                
-                
             </div>
+            <div class="push"></div>
         </div>
-                
+        <jsp:include page="../Global/footer.jsp" />
+
     </body>
     <script src="${pageContext.request.contextPath}/Global/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/Global/js/bootstrap.js"></script>

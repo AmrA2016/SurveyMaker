@@ -65,9 +65,13 @@ background:#0abab5;
 
 
 .footer{
-    padding-top: 10px;
     background:#0abab5;
     width:100%;
+}
+
+.footer , .push{
+    
+    padding-top: 10px;
     height:80px;
 }
 

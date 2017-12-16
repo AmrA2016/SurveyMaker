@@ -23,73 +23,77 @@
     <body>
 
         <jsp:include page="../Global/navbar.jsp" />
-        
-        <!--   Survey Form-->
-        <div class="survey-container row">
-            <div class="col-md-6 col-md-offset-3 ">
-                <div class="survey-form ">
-                    <form action="${pageContext.request.contextPath}/Survey_AddSurvey" method="post">
-                        <div class="form-header text-center">
-                            <p>Add Survey</p>
-                        </div>
-                        <div class="form-body">
-                            <div class="form-group">
-                                <input type="text" class="form-control survey-title" name="survey_title" value="Untitled Survey" required>
+        <div class="wrapper">
+            <!--   Survey Form-->
+            <div class="survey-container row">
+                <div class="col-md-6 col-md-offset-3 ">
+                    <div class="survey-form ">
+                        <form action="${pageContext.request.contextPath}/Survey_AddSurvey" method="post">
+                            <div class="form-header text-center">
+                                <p>Add Survey</p>
                             </div>
-
-                            <div class="questions">
-                                <input type="number" min="1" class="questions-count" name="questions_count" value="0" hidden="hidden">
-                            </div>
-
-                            <div class="add-question">
-                                <a href="#" title="Add Question" data-toggle="modal" data-target="#question-popup"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-                            </div>
-
-                        </div>
-                        <div class="form-footer text-center">
-                            <input type="submit" class="btn " value="Save Survey">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!--    Add Question Popup-->
-        <div id="question-popup" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <button class="close" data-dismiss="modal">
-                            &times;
-                        </button>
-                        <div class="modal-title">
-                            <h4>Add Question</h4>
-                        </div>
-                    </div>
-                    <div class="modal-body">
-                        <form id="add-question-form" action="" class="form-inline">
-                            <div class="row">
-                                <div class="form-group col-md-4 col-md-offset-2 ">
-                                    <select name="new_question_type"  class="form-control">
-                                        <option value="-1" disabled selected>Select Question type</option>
-                                        <option value="mcq">MCQ</option>
-                                        <option value="checkbox">Checkbox</option>
-                                        <option value="open">Open Question</option>
-                                    </select>
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <input type="text" class="form-control survey-title" name="survey_title" value="Untitled Survey" required>
                                 </div>
-                                <div class="col-md-2 ">
-                                    <input type="submit" class="btn btn-primary" value="Add Question">
+
+                                <div class="questions">
+                                    <input type="number" min="1" class="questions-count" name="questions_count" value="0" hidden="hidden">
                                 </div>
+
+                                <div class="add-question">
+                                    <a href="#" title="Add Question" data-toggle="modal" data-target="#question-popup"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                                </div>
+
+                            </div>
+                            <div class="form-footer text-center">
+                                <input type="submit" class="btn " value="Save Survey">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--======================-->
 
-        <!--############################################ -->
-        
+            <!--    Add Question Popup-->
+            <div id="question-popup" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <button class="close" data-dismiss="modal">
+                                &times;
+                            </button>
+                            <div class="modal-title">
+                                <h4>Add Question</h4>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <form id="add-question-form" action="" class="form-inline">
+                                <div class="row">
+                                    <div class="form-group col-md-4 col-md-offset-2 ">
+                                        <select name="new_question_type"  class="form-control">
+                                            <option value="-1" disabled selected>Select Question type</option>
+                                            <option value="mcq">MCQ</option>
+                                            <option value="checkbox">Checkbox</option>
+                                            <option value="open">Open Question</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <input type="submit" class="btn btn-primary" value="Add Question">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--======================-->
+
+            <!--############################################ -->
+
+            <div class="push"></div>
+        </div>
+
+        <jsp:include page="../Global/footer.jsp" />
     </body>
 
     <script src="${pageContext.request.contextPath}/Global/js/jquery.min.js"></script>

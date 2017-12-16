@@ -23,299 +23,302 @@
     <body>
         <jsp:include page="../Global/navbar.jsp" />
         <h1>Admin Home</h1>
-        <div class="container surveys-container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="survey-card">
-                        <div class="survey-header">
-                            <h3 class="survey-name"> Travelling </h3>
+        <div class="wrapper">
+            <div class="container surveys-container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="survey-card">
+                            <div class="survey-header">
+                                <h3 class="survey-name"> Travelling </h3>
+                            </div>
+                            <div class="responses">
+                                <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
+                            </div>
+                            <div class=" suspend">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="survey-footer">
+                                <div class="icons">
+                                    <a class="view-survey" href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
+                                    <a class="report-survey" href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
+                                    <a class="view-stat" href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
+                                    <a class="del-survey" href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="responses">
-                            <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="survey-card">
+                            <div class="survey-header">
+                                <h3 class="survey-name"> Travelling </h3>
+                            </div>
+                            <div class="responses">
+                                <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
+                            </div>
+                            <div class=" suspend">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="survey-footer">
+                                <div class="icons">
+                                    <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
                         </div>
-                        <div class=" suspend">
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="survey-card">
+                            <div class="survey-header">
+                                <h3 class="survey-name"> Travelling </h3>
+                            </div>
+                            <div class="responses">
+                                <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
+                            </div>
+                            <div class=" suspend">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="survey-footer">
+                                <div class="icons">
+                                    <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="survey-footer">
-                            <div class="icons">
-                                <a class="view-survey" href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
-                                <a class="report-survey" href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
-                                <a class="view-stat" href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
-                                <a class="del-survey" href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="survey-card">
+                            <div class="survey-header">
+                                <h3 class="survey-name"> Travelling </h3>
+                            </div>
+                            <div class="responses">
+                                <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
+                            </div>
+                            <div class=" suspend">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="survey-footer">
+                                <div class="icons">
+                                    <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="survey-card">
+                            <div class="survey-header">
+                                <h3 class="survey-name"> Travelling </h3>
+                            </div>
+                            <div class="responses">
+                                <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
+                            </div>
+                            <div class=" suspend">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="survey-footer">
+                                <div class="icons">
+                                    <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="survey-card">
+                            <div class="survey-header">
+                                <h3 class="survey-name"> Travelling </h3>
+                            </div>
+                            <div class="responses">
+                                <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
+                            </div>
+                            <div class=" suspend">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="survey-footer">
+                                <div class="icons">
+                                    <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="survey-card">
+                            <div class="survey-header">
+                                <h3 class="survey-name"> Travelling </h3>
+                            </div>
+                            <div class="responses">
+                                <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
+                            </div>
+                            <div class=" suspend">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="survey-footer">
+                                <div class="icons">
+                                    <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="survey-card">
+                            <div class="survey-header">
+                                <h3 class="survey-name"> Travelling </h3>
+                            </div>
+                            <div class="responses">
+                                <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
+                            </div>
+                            <div class=" suspend">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="survey-footer">
+                                <div class="icons">
+                                    <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="survey-card">
+                            <div class="survey-header">
+                                <h3 class="survey-name"> Travelling </h3>
+                            </div>
+                            <div class="responses">
+                                <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
+                            </div>
+                            <div class=" suspend">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="survey-footer">
+                                <div class="icons">
+                                    <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="survey-card">
+                            <div class="survey-header">
+                                <h3 class="survey-name"> Travelling </h3>
+                            </div>
+                            <div class="responses">
+                                <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
+                            </div>
+                            <div class=" suspend">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="survey-footer">
+                                <div class="icons">
+                                    <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="survey-card">
+                            <div class="survey-header">
+                                <h3 class="survey-name"> Travelling </h3>
+                            </div>
+                            <div class="responses">
+                                <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
+                            </div>
+                            <div class=" suspend">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="survey-footer">
+                                <div class="icons">
+                                    <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="survey-card">
+                            <div class="survey-header">
+                                <h3 class="survey-name"> Travelling </h3>
+                            </div>
+                            <div class="responses">
+                                <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
+                            </div>
+                            <div class=" suspend">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="survey-footer">
+                                <div class="icons">
+                                    <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
+                                    <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="survey-card">
-                        <div class="survey-header">
-                            <h3 class="survey-name"> Travelling </h3>
-                        </div>
-                        <div class="responses">
-                            <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
-                        </div>
-                        <div class=" suspend">
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="survey-footer">
-                            <div class="icons">
-                                <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="survey-card">
-                        <div class="survey-header">
-                            <h3 class="survey-name"> Travelling </h3>
-                        </div>
-                        <div class="responses">
-                            <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
-                        </div>
-                        <div class=" suspend">
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="survey-footer">
-                            <div class="icons">
-                                <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="survey-card">
-                        <div class="survey-header">
-                            <h3 class="survey-name"> Travelling </h3>
-                        </div>
-                        <div class="responses">
-                            <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
-                        </div>
-                        <div class=" suspend">
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="survey-footer">
-                            <div class="icons">
-                                <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="survey-card">
-                        <div class="survey-header">
-                            <h3 class="survey-name"> Travelling </h3>
-                        </div>
-                        <div class="responses">
-                            <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
-                        </div>
-                        <div class=" suspend">
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="survey-footer">
-                            <div class="icons">
-                                <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="survey-card">
-                        <div class="survey-header">
-                            <h3 class="survey-name"> Travelling </h3>
-                        </div>
-                        <div class="responses">
-                            <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
-                        </div>
-                        <div class=" suspend">
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="survey-footer">
-                            <div class="icons">
-                                <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="survey-card">
-                        <div class="survey-header">
-                            <h3 class="survey-name"> Travelling </h3>
-                        </div>
-                        <div class="responses">
-                            <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
-                        </div>
-                        <div class=" suspend">
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="survey-footer">
-                            <div class="icons">
-                                <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="survey-card">
-                        <div class="survey-header">
-                            <h3 class="survey-name"> Travelling </h3>
-                        </div>
-                        <div class="responses">
-                            <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
-                        </div>
-                        <div class=" suspend">
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="survey-footer">
-                            <div class="icons">
-                                <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="survey-card">
-                        <div class="survey-header">
-                            <h3 class="survey-name"> Travelling </h3>
-                        </div>
-                        <div class="responses">
-                            <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
-                        </div>
-                        <div class=" suspend">
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="survey-footer">
-                            <div class="icons">
-                                <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="survey-card">
-                        <div class="survey-header">
-                            <h3 class="survey-name"> Travelling </h3>
-                        </div>
-                        <div class="responses">
-                            <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
-                        </div>
-                        <div class=" suspend">
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="survey-footer">
-                            <div class="icons">
-                                <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="survey-card">
-                        <div class="survey-header">
-                            <h3 class="survey-name"> Travelling </h3>
-                        </div>
-                        <div class="responses">
-                            <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
-                        </div>
-                        <div class=" suspend">
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="survey-footer">
-                            <div class="icons">
-                                <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="survey-card">
-                        <div class="survey-header">
-                            <h3 class="survey-name"> Travelling </h3>
-                        </div>
-                        <div class="responses">
-                            <span style="font-size: 60px; font-family: Roboto; color: #0abab5;" class="responses-word"> 12 <h5 style="font-family: Roboto; position:relative; left: 5px; color: #595959; bottom: 15px;"> Responses </h5></span>
-                        </div>
-                        <div class=" suspend">
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="survey-footer">
-                            <div class="icons">
-                                <a href="" title="View survey"><i class="fa fa-eye fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Report survey"><i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="View survey statistics"><i class="fa fa-line-chart fa-lg icon" aria-hidden="true"></i></a>
-                                <a href="" title="Delete survey"><i class="fa fa-times fa-lg icon" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>  
-
+            </div>  
+            <div class="push"></div>
+        </div>
+        <jsp:include page="../Global/footer.jsp" />
     </body>
     <script src="${pageContext.request.contextPath}/Global/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/Global/js/bootstrap.js"></script>
