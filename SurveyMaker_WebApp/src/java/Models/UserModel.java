@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,6 +55,38 @@ public class UserModel {
         stmt.close();
         con.close();
 
+    }
+    
+    public static HashMap<Integer,Boolean> getMyNotifications(int user_id) throws ClassNotFoundException, SQLException{
+        HashMap<Integer,Boolean> notifications = new HashMap<>();
+        
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root", "");
+        Statement stmt = (Statement) con.createStatement();
+        
+        String query = "SELECT notification_id,seen FROM notification_user WHERE user_id = '%s'";
+        ResultSet rs = stmt.executeQuery(String.format(query, user_id));
+        
+        while(rs.next()){
+            notifications.put(rs.getInt(1), rs.getBoolean(2));
+        }
+        
+        rs.close();
+        stmt.close();
+        con.close();
+        return notifications;
+    }
+    
+    public static void readNotification(int notification_id) throws ClassNotFoundException, SQLException{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root", "");
+        Statement stmt = (Statement) con.createStatement();
+        
+        String query = "UPDATE notification_user SET seen = 1 WHERE notification_id = '%s'";
+        stmt.execute(String.format(query, notification_id));
+        
+        stmt.close();
+        con.close();
     }
     
     public static ArrayList<Integer> getAllNormalUsers() throws ClassNotFoundException, SQLException {
@@ -222,9 +255,7 @@ public class UserModel {
         Statement stmt = (Statement) con.createStatement();
         String query = "UPDATE user SET admin = '%s' WHERE id = '%s' ";
 
-        
-            stmt.executeUpdate(String.format(query, 1, user_id));
-        
+        stmt.executeUpdate(String.format(query, 1, user_id));
 
         stmt.close();
         con.close();
@@ -237,9 +268,7 @@ public class UserModel {
         Statement stmt = (Statement) con.createStatement();
         String query = "UPDATE user SET suspended = '%s' WHERE id = '%s' ";
 
-        
-            stmt.executeUpdate(String.format(query, 1, user_id));
-        
+        stmt.executeUpdate(String.format(query, 1, user_id));
 
         stmt.close();
         con.close();
