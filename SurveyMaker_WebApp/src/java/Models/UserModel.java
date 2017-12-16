@@ -215,5 +215,50 @@ public class UserModel {
         con.close();
 
     }
+    public static void setAdmin(int user_id) throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root", "");
+        Statement stmt = (Statement) con.createStatement();
+        String query = "UPDATE user SET admin = '%s' WHERE id = '%s' ";
+
+        
+            stmt.executeUpdate(String.format(query, 1, user_id));
+        
+
+        stmt.close();
+        con.close();
+
+    }
+    public static void setSuspended(int user_id) throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root", "");
+        Statement stmt = (Statement) con.createStatement();
+        String query = "UPDATE user SET suspended = '%s' WHERE id = '%s' ";
+
+        
+            stmt.executeUpdate(String.format(query, 1, user_id));
+        
+
+        stmt.close();
+        con.close();
+
+    }
+    public static void setUnSuspended(int user_id) throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll_surveyapp", "root", "");
+        Statement stmt = (Statement) con.createStatement();
+        String query = "UPDATE user SET suspended = '%s' WHERE id = '%s' ";
+
+        
+            stmt.executeUpdate(String.format(query, 0, user_id));
+        
+
+        stmt.close();
+        con.close();
+
+    }
    
 }
