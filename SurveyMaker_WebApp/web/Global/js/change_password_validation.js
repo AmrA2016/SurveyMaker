@@ -1,9 +1,9 @@
 
 
 function matchpass() {
-    var firstpassword = document.form.new_password.value;
-    var secondpassword = document.form.confirm_password.value;
-
+    var firstpassword = document.getElementById("changePasswordForm").new_password.value;
+    var secondpassword = document.getElementById("changePasswordForm").confirm_password.value;
+    
     if (firstpassword == secondpassword) {
        document.getElementById("passwordmsg").style.display="none"
         return true;
