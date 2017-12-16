@@ -1,0 +1,14 @@
+body { 
+    padding-top: 70px; 
+}
+
+.btn{
+    background-color: rgba(10, 186, 181, 1);
+    color: white;
+}
+
+
+.btn:hover{
+    background-color: rgba(10, 186, 181, 0.7);
+    color: white;
+}

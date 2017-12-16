@@ -1,4 +1,4 @@
-body { padding-top: 70px; }
+
 
 .navbar{
     
@@ -54,6 +54,13 @@ i , .caret{
     position: relative;
     top: 80%;
     right: 110px;
+}
+
+.modal .title{
+    background: #0abab5;
+    color: white;
+    text-align: center;
+    font-size: 22px;
 }
 
 
