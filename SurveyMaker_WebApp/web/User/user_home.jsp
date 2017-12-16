@@ -77,7 +77,6 @@
             </div>
         </div>
                 
-        <jsp:include page="../Global/footer.jsp" />
     </body>
     <script src="${pageContext.request.contextPath}/Global/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/Global/js/bootstrap.js"></script>

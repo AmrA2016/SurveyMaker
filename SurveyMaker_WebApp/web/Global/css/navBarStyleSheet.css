@@ -19,12 +19,12 @@ background:#0abab5;
     display:inline;
     position: fixed;
     padding: 12px;
-    font-size: 24;
+    font-size: 24px;
     color: #ffffff;
-    font-weight: 720;
+    font-weight: 700;
 
 }
-i , .caret{
+.navbar i ,.navbar .caret{
      color: #fed929;
 }
 .navbar-brand:hover{
@@ -64,17 +64,11 @@ i , .caret{
 }
 
 
-footer{
-    margin-top: 20px;
+.footer{
     padding-top: 10px;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
     background:#0abab5;
     width:100%;
     height:80px;
-    
 }
 
 #footerText{

@@ -22,7 +22,8 @@
     </head>
     <body>
 
-
+        <jsp:include page="../Global/navbar.jsp" />
+        
         <!--   Survey Form-->
         <div class="survey-container row">
             <div class="col-md-6 col-md-offset-3 ">
@@ -37,7 +38,7 @@
                             </div>
 
                             <div class="questions">
-                                <input type="number" class="questions-count" name="questions_count" value="0" hidden="hidden">
+                                <input type="number" min="1" class="questions-count" name="questions_count" value="0" hidden="hidden">
                             </div>
 
                             <div class="add-question">
@@ -88,7 +89,7 @@
         <!--======================-->
 
         <!--############################################ -->
-
+        
     </body>
 
     <script src="${pageContext.request.contextPath}/Global/js/jquery.min.js"></script>
