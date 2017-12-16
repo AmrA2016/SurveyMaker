@@ -19,6 +19,8 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     </head>
     <body>
+        <jsp:include page="../Global/navbar.jsp" />
+        
         <%
             Boolean justVerified = (Boolean) request.getAttribute("JustVerified");
 
@@ -30,7 +32,6 @@
         <%
             }
         %>
-        
         <a href="${pageContext.request.contextPath}/User_GetMySurveys" class="btn btn-primary">Get My Surveys</a>
         <a href="${pageContext.request.contextPath}/Survey_AddSurveyForm" class="btn btn-primary">Add Survey</a>
         <a href="${pageContext.request.contextPath}/Logout" class="btn btn-primary">Logout</a>
@@ -77,6 +78,8 @@
                 
             </div>
         </div>
+                
+        <jsp:include page="../Global/footer.jsp" />
     </body>
     <script src="${pageContext.request.contextPath}/Global/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/Global/js/bootstrap.js"></script>
