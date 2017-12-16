@@ -1,0 +1,82 @@
+
+body {
+    background-color: whitesmoke;
+}
+
+
+.survey-card {
+
+    position: relative;
+    height: 350px;
+    background-color: white;
+    border-bottom: 1px solid #D1D1D1;
+    border-radius: 5px;
+
+}
+
+.surveys-container{
+    margin-top: 60px;
+}
+
+.survey-header {
+    position: relative;
+    height: 60px;
+    background-color: #0abab5;
+    border-top: 1px none;
+    border-radius: 2px;
+}
+
+.survey-name {
+    position: relative;
+    font-family: Roboto;
+    top: 15px;
+    text-align: center;
+    color: white;
+}
+
+.responses {
+
+    border-bottom: 1px solid #D1D1D1;
+    position: relative;
+    text-align: center;
+    top: 100px;
+
+}
+
+.responses-word {
+
+    position: relative;
+    font-family: Roboto;
+    font-weight: bold;
+    bottom: 35px;
+
+
+}
+
+.icon:hover {
+
+    color: #0abab5;
+}
+
+.survey-footer {
+
+    position: relative;
+    top: 120px;
+
+}
+
+.icons {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.icon {
+    position: relative;
+    top: 10px;
+    color: grey;
+    margin-right: 8px;
+}
+
+
+
+
