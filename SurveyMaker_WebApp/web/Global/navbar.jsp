@@ -30,6 +30,8 @@
                 </div>
                 <% 
                     Integer user_id = (Integer)session.getAttribute("user_id");
+                    ArrayList<Notification> notifications = new ArrayList<Notification>();
+                    
                     if(user_id != null)
                     {
                 %>
@@ -50,7 +52,6 @@
                         <%
                             HashMap<Integer,Boolean> user_notifications = UserModel.getMyNotifications(user_id);
 
-                            ArrayList<Notification> notifications = new ArrayList<Notification>();
                             int unread_count = 0;
                             for(int key : user_notifications.keySet())
                             {
@@ -63,7 +64,15 @@
                         %>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle notifications" data-toggle="dropdown">
-                                <i class="fa fa-bell"></i><span class="badge badge-notify"><%= unread_count %></span>                               
+                                <i class="fa fa-bell"></i>
+                                <%
+                                    if(unread_count > 0)
+                                    {
+                                %>
+                                <span class="badge badge-notify"><%= unread_count %></span>
+                                <%
+                                    }
+                                %>
                             </a>                 
                             <ul class="dropdown-menu">  
                                 <%
@@ -201,4 +210,15 @@
     </body>
     
     <script src="${pageContext.request.contextPath}/Global/js/change_password_validation.js"></script>
+    
+    <script src="${pageContext.request.contextPath}/Global/js/jquery.js"></script>
+    <script>
+        $(".notifications").on("click",function(){
+            <%
+                for (int i = 0; i < notifications.size(); i++) {
+                    UserModel.readNotification(notifications.get(i).getId());
+                }
+            %>    
+        });
+    </script>
 </html>

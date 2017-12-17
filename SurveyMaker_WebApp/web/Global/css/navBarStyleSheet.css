@@ -23,6 +23,7 @@ background:#0abab5;
 }
 .navbar i ,.navbar .caret{
      color: #fed929;
+     font-size: 16px;
 }
 .navbar-brand:hover{
     color: #ffffff;
