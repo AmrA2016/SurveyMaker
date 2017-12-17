@@ -22,7 +22,7 @@
     </head>
     <body>
         <jsp:include page="../Global/navbar.jsp" />
-        
+
         <div class="wrapper">
             <div class="container surveys-container">
                 <div class="row">
@@ -85,11 +85,12 @@
                 </div>
             </div>
         </div>
+                   
         <jsp:include page="../Global/footer.jsp" />
     </body>
     <script src="${pageContext.request.contextPath}/Global/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/Global/js/bootstrap.js"></script>
-    
+
     <script>
         function deleteSurvey(id) {
             var xhttp = new XMLHttpRequest();

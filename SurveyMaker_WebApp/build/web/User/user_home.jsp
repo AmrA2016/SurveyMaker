@@ -61,7 +61,7 @@
                                     <a class="view-survey" href=<% out.print(request.getContextPath() + "/Survey_ViewSurvey?survey_id=" + surveys.get(i).getId()); %> title="View survey">
                                        <i class="fa fa-eye fa-lg icon" aria-hidden="true"></i>
                                     </a>
-                                    <a class="report-survey" href="#" title="Report survey">
+                                    <a class="report-survey" href="#" data-toggle="modal" data-target="#reportSurvey" title="Report survey">
                                         <i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i>
                                     </a>
                                 </div>
@@ -77,6 +77,25 @@
                 </div>
             </div>
         </div>
+        <div class="modal " id="reportSurvey">              
+            <div class="modal-dialog ">
+                <div class="modal-content">
+
+                    <div class="modal-header title">
+                        Report Survey                  
+                        <button class="close" data-dismiss="modal">&times;</button>   
+                    </div>
+                    <form action="${pageContext.request.contextPath}/Survey_ReportSurvey" method="post">
+                        <div class="modal-body">
+                            <textarea class="form-control" rows="3" placeholder="Reasons For Reporting "></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn">Report Survey</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> 
         <jsp:include page="../Global/footer.jsp" />
 
     </body>
