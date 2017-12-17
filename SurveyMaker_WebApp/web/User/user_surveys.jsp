@@ -88,43 +88,45 @@
     <script src="${pageContext.request.contextPath}/Global/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/Global/js/bootstrap.js"></script>
     <script>
-                                        function deleteSurvey(id) {
-                                            var xhttp = new XMLHttpRequest();
+        function deleteSurvey(id) {
+            var xhttp = new XMLHttpRequest();
 
-                                            xhttp.onreadystatechange = function () {
-                                                if (this.readyState == 4 && this.status == 200) {
-                                                    document.getElementById("response").innerHTML = this.responseText;
-                                                    document.getElementById("survey-" + id).style.display = 'none';
-                                                }
-                                            };
-                                            xhttp.open("GET", '/SurveyMaker_WebApp/Survey_RemoveSurvey?survey_id=' + id, true);
-                                            xhttp.send();
-                                        }
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("response").innerHTML = this.responseText;
+                    document.getElementById("survey-" + id).style.display = 'none';
+                }
+            };
+            xhttp.open("GET", '/SurveyMaker_WebApp/Survey_RemoveSurvey?survey_id=' + id, true);
+            xhttp.send();
+        }
+        ;
 
-                                        function suspendSurvey(id) {
-                                            if (document.getElementById("suspend-survey-" + id).checked == false) {
-                                                var xhttp = new XMLHttpRequest();
+        function suspendSurvey(id) {
+            if (document.getElementById("suspend-survey-" + id).checked == false) {
+                var xhttp = new XMLHttpRequest();
 
-                                                xhttp.onreadystatechange = function () {
-                                                    if (this.readyState == 4 && this.status == 200) {
-                                                        document.getElementById("response").innerHTML = this.responseText;
-                                                    }
-                                                };
-                                                xhttp.open("GET", '/SurveyMaker_WebApp/Survey_SuspendSurvey?survey_id=' + id, true);
-                                                xhttp.send();
-                                            } else {
-                                                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("response").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", '/SurveyMaker_WebApp/Survey_SuspendSurvey?survey_id=' + id, true);
+                xhttp.send();
+            } else {
+                var xhttp = new XMLHttpRequest();
 
-                                                xhttp.onreadystatechange = function () {
-                                                    if (this.readyState == 4 && this.status == 200) {
-                                                        document.getElementById("response").innerHTML = this.responseText;
-                                                    }
-                                                };
-                                                xhttp.open("GET", '/SurveyMaker_WebApp/Survey_UnSuspendSurvey?survey_id=' + id, true);
-                                                xhttp.send();
-                                            }
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("response").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", '/SurveyMaker_WebApp/Survey_UnSuspendSurvey?survey_id=' + id, true);
+                xhttp.send();
+            }
 
-                                        }
+        }
+        ;
 
 
     </script>
