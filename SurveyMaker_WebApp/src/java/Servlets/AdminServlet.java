@@ -5,10 +5,12 @@
  */
 package Servlets;
 
+import Entities.User;
 import Models.UserModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -22,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Manar Ashraf
  */
-@WebServlet(name = "AdminServlet", urlPatterns = {"/Make_Admin", "/Suspend_User", "/Unsuspend_User"})
+@WebServlet(name = "AdminServlet", urlPatterns = {"/Make_Admin", "/Suspend_User", "/Unsuspend_User" , "/GetUsers"})
 public class AdminServlet extends HttpServlet {
 
     /**
@@ -44,6 +46,9 @@ public class AdminServlet extends HttpServlet {
             suspendUser(request,response);
         }else if (path.equals("/Unsuspend_User")) {
             unSuspendUser(request, response);
+        }
+        else if(path.equals("/GetUsers")){
+            getUsers(request, response);
         }
     }
 
@@ -111,7 +116,7 @@ public class AdminServlet extends HttpServlet {
             {
                 int id = Integer.parseInt(request.getParameter("user_id"));
                 user.setAdmin(id);
-                response.sendRedirect(request.getContextPath() + "/Home");
+                response.sendRedirect(request.getContextPath() + "/GetUsers");
             }else{
                 response.sendRedirect(request.getContextPath() + "/Home");
             }
@@ -133,7 +138,7 @@ public class AdminServlet extends HttpServlet {
             {
                 int id = Integer.parseInt(request.getParameter("user_id"));
                 user.setSuspended(id);
-                response.sendRedirect(request.getContextPath() + "/Home");
+                response.sendRedirect(request.getContextPath() + "/GetUsers");
             }else{
                 response.sendRedirect(request.getContextPath() + "/Home");
             }
@@ -155,7 +160,34 @@ public class AdminServlet extends HttpServlet {
             {
                 int id = Integer.parseInt(request.getParameter("user_id"));
                 user.setUnSuspended(id);
+                response.sendRedirect(request.getContextPath() + "/GetUsers");
+            }else{
                 response.sendRedirect(request.getContextPath() + "/Home");
+            }
+        }else{
+            response.sendRedirect(request.getContextPath() + "/Home");
+            
+        }
+    }
+
+    private void getUsers(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException, ServletException {
+        HttpSession session = request.getSession();
+        Integer user_id = (Integer)session.getAttribute("user_id");
+        UserModel user = new UserModel();
+        
+        if(user_id != null)
+        {
+            String userType = (String) session.getAttribute("user_type");
+            if(userType.equals("admin"))
+            {
+                ArrayList<Integer> user_ids = UserModel.getAllNormalUsers();
+                ArrayList<User> normal_users = new ArrayList<>();
+                
+                for(int i = 0;i < user_ids.size();i++)
+                    normal_users.add(UserModel.getByID(user_ids.get(i)));
+                
+                request.setAttribute("Users", normal_users);
+                request.getRequestDispatcher("Admin/normal_users.jsp").forward(request, response);
             }else{
                 response.sendRedirect(request.getContextPath() + "/Home");
             }

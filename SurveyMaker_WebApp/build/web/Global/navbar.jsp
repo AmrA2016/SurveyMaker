@@ -63,7 +63,7 @@
                             }
                         %>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle notifications" data-toggle="dropdown">
+                            <a href="#" class="dropdown-toggle notifications" onclick="readNotifications();" data-toggle="dropdown">
                                 <i class="fa fa-bell"></i>
                                 <%
                                     if(unread_count > 0)
@@ -102,7 +102,7 @@
                                 <%
                                     }else{
                                 %>
-                                <li><a href="#">View Users</a></li>
+                                <li><a href="${pageContext.request.contextPath}/GetUsers">View Users</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#sendMessage">Send Message</a></li>
                                 <%
                                     }
@@ -211,14 +211,14 @@
     
     <script src="${pageContext.request.contextPath}/Global/js/change_password_validation.js"></script>
     
-    <script src="${pageContext.request.contextPath}/Global/js/jquery.js"></script>
+    
     <script>
-        $(".notifications").on("click",function(){
+        function readNotifications(){
             <%
                 for (int i = 0; i < notifications.size(); i++) {
                     UserModel.readNotification(notifications.get(i).getId());
                 }
             %>    
-        });
+        };
     </script>
 </html>

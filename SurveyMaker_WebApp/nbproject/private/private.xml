@@ -4,13 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/web/Global/navbar.jsp</file>
-            <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/web/Global/css/navBarStyleSheet.css</file>
-            <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/web/User/user_surveys.jsp</file>
-            <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/web/Global/footer.jsp</file>
-            <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/web/Global/css/style.css</file>
+            <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/src/java/Servlets/UserServlet.java</file>
+            <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/web/Admin/normal_users.jsp</file>
             <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/web/User/user_home.jsp</file>
             <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/web/Admin/admin_home.jsp</file>
-            <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/web/Survey/AddSurvey.jsp</file>
+            <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/src/java/Models/UserModel.java</file>
+            <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/src/java/Servlets/AdminServlet.java</file>
+            <file>file:/G:/My%20files/Amr/Fci-Cairo/Level%204/Term%201/Internet%20Applications/IA-Project/SurveyMaker_WebApp/web/Admin/css/all_users.css</file>
         </group>
     </open-files>
 </project-private>
