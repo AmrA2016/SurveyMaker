@@ -13,12 +13,9 @@ background:#0abab5;
 }
 
 .navbar-brand{
-    position: fixed;
-    left: 10%;
-    top: 0%;
     display:inline;
-    position: fixed;
     padding: 12px;
+    margin-left: 60px !important;
     font-size: 24px;
     color: #ffffff;
     font-weight: 700;

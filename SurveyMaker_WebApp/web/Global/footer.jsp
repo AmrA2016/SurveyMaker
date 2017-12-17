@@ -11,9 +11,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <div style="padding-bottom: 120px">
-            
-        </div>
         <div  class="footer">
           <p id="footerText">© 2017 Survey Maker | Terms of Service </p>
           <p id="footerText"> All Rights Reserved | Privacy Policy</p>

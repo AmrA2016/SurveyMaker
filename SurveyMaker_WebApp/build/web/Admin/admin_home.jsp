@@ -316,7 +316,6 @@
                     </div>
                 </div>
             </div>  
-            <div class="push"></div>
         </div>
         <jsp:include page="../Global/footer.jsp" />
     </body>
