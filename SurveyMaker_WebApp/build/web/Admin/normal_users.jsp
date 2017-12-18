@@ -32,7 +32,7 @@
                         for (int i = 0; i < normal_users.size(); i++) {
                     %>
                     <tr>
-                        <th scope="row">1</th>
+                        <td><%= (i+1) %></td>
                         <td><%= normal_users.get(i).getMail()%></td>        
                         <td class="text-center">
                             <%

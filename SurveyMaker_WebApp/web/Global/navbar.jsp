@@ -103,6 +103,7 @@
                                     }else{
                                 %>
                                 <li><a href="${pageContext.request.contextPath}/GetUsers">View Users</a></li>
+                                <li><a href="${pageContext.request.contextPath}/GetReports">View Survey Reports</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#sendMessage">Send Message</a></li>
                                 <%
                                     }

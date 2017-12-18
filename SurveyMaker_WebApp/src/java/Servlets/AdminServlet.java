@@ -6,8 +6,10 @@
 package Servlets;
 
 import Entities.Notification;
+import Entities.Report;
 import Entities.User;
 import Models.NotificationModel;
+import Models.ReportModel;
 import Models.UserModel;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,7 +36,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Manar Ashraf
  */
-@WebServlet(name = "AdminServlet", urlPatterns = {"/Make_Admin", "/Suspend_User", "/Unsuspend_User" , 
+@WebServlet(name = "AdminServlet", urlPatterns = {"/Make_Admin", "/Suspend_User", "/Unsuspend_User" , "/GetReports", 
                                                   "/GetUsers", "/Admin_sendMessage","/Admin_ChangePassword"})
 public class AdminServlet extends HttpServlet {
 
@@ -62,10 +64,12 @@ public class AdminServlet extends HttpServlet {
             getUsers(request, response);
         }else if (path.equals("/Admin_sendMessage")) {
             sendMessage(request, response);
-        }
-        else if (path.equals("/Admin_ChangePassword")) {
+        }else if (path.equals("/Admin_ChangePassword")) {
             adminChangePassword(request, response);
+        }else if (path.equals("/GetReports")) {
+            getReports(request, response);
         }
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -293,6 +297,26 @@ public class AdminServlet extends HttpServlet {
         }
     }
     
+    
+    private void getReports(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException, ServletException {
+        HttpSession session = request.getSession();
+        Integer user_id = (Integer)session.getAttribute("user_id");
+        if(user_id == null)
+            response.sendRedirect(request.getContextPath() + "/Home");
+        else{
+            String user_type = (String)session.getAttribute("user_type");
+            if(user_type.equals("admin")){
+                ArrayList<Report> reports = ReportModel.getAll();
+                
+                request.setAttribute("Reports", reports);
+                request.getRequestDispatcher("Admin/survey_reports.jsp").forward(request, response);
+            }
+            else{
+                response.sendRedirect(request.getContextPath() + "/Home");
+            }
+        }
+    }
+    
     private boolean sendMail(String Reciever, String subject, String text) {
 
         String username = "surveymaker.owner@gmail.com";
@@ -339,4 +363,5 @@ public class AdminServlet extends HttpServlet {
             return false;
         }
     }
+
 }
