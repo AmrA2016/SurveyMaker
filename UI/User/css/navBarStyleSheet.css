@@ -54,6 +54,20 @@ i , .caret{
     right: 110px;
 }
 
+.notifications-menu{
+    height: 300px;
+    overflow-y: auto;
+}
+
+.notification-text{
+    width: 200px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.notification-text a{
+    white-space: pre-line !important;
+}
+
 
 footer{
     padding-top: 10px;

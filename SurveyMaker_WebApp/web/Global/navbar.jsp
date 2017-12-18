@@ -74,12 +74,12 @@
                                     }
                                 %>
                             </a>                 
-                            <ul class="dropdown-menu">  
+                            <ul class="dropdown-menu notifications-menu">  
                                 <%
                                     for(int i = 0;i < notifications.size();i++)
                                     {
                                 %>
-                                <li><a href=""><%= notifications.get(i).getContent() %></a></li>
+                                <li class="notification-text"><a href=""><%= notifications.get(i).getContent() %></a></li>
                                 <%
                                     }
                                 %>

@@ -54,6 +54,20 @@ background:#0abab5;
     right: 110px;
 }
 
+.notifications-menu{
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.notification-text{
+    width: 200px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.notification-text a{
+    white-space: pre-line !important;
+}
+
 .modal .title{
     background: #0abab5;
     color: white;
