@@ -37,19 +37,19 @@
                         <td><%= normal_users.get(i).getMail() %></td>        
                         <td class="text-center">
                             <% 
-                                if(normal_users.get(i).isSuspended())
+                                if(!normal_users.get(i).isSuspended())
                                 {
                             %>  
-                            <a href="${pageContext.request.contextPath}/Suspend_User?user_id="<%= normal_users.get(i).getId() %> style="margin-right:10px" class="btn">Suspend</a>
+                            <a href=<%= request.getContextPath() + "/Suspend_User?user_id=" + normal_users.get(i).getId() %> style="margin-right:10px" class="btn">Suspend</a>
                             <%
                                 }else
                                 {
                             %>   
-                            <a href="${pageContext.request.contextPath}/Unsuspend_User?user_id="<%= normal_users.get(i).getId() %> style="margin-right:10px" class="btn">Unsuspend</a>
+                            <a href=<%= request.getContextPath() + "/Unsuspend_User?user_id=" + normal_users.get(i).getId() %> style="margin-right:10px" class="btn">Unsuspend</a>
                             <%
                                 }
                             %>
-                            <a href="${pageContext.request.contextPath}/Make_Admin?user_id="<%= normal_users.get(i).getId() %> style="margin-right:10px" class="btn">Make Admin</a>
+                            <a href=<%= request.getContextPath() + "/Make_Admin?user_id=" + normal_users.get(i).getId() %> style="margin-right:10px" class="btn">Make Admin</a>
                             <a href="" class="btn">Change Password</a>
                         </td>
                     </tr>

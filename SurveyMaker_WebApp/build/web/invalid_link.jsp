@@ -14,7 +14,9 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Authentication/css/verification.css">
     </head>
     <body>
-        <div class = "container">
+        <jsp:include page="Global/navbar.jsp" />
+
+        <div class = "container wrapper">
             <div class = "col-lg-4">
             </div>
             <div class="col-lg-4">
@@ -32,8 +34,12 @@
                 <div class = "col-lg-4">
                 </div>
             </div>
+        </div>
+        
+        <jsp:include page="Global/footer.jsp" />
+
     </body>
     <script src="${pageContext.request.contextPath}/Global/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/Global/js/bootstrap.js"></script>
-    
+
 </html>

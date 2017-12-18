@@ -133,24 +133,35 @@ public class MainServlet extends HttpServlet {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         else{
             String userType = (String) session.getAttribute("user_type");
-            ArrayList<Survey> all_surveys = SurveyModel.getAll();
-            ArrayList<Survey> other_surveys = new ArrayList<>();
-            HashMap<Integer,Integer> responses_count = new HashMap<>();
-            for(int i =0;i < all_surveys.size();i++)
-            {
-                if(all_surveys.get(i).getCreator_id() != user_id){
-                    other_surveys.add(all_surveys.get(i));
+            if(userType.equals("admin")){
+                
+                ArrayList<Survey> all_surveys = SurveyModel.getAll();
+                HashMap<Integer,Integer> responses_count = new HashMap<>();
+                for(int i =0;i < all_surveys.size();i++)
+                {
                     ArrayList<SurveyAnswer> survey_answers = SurveyAnswerModel.getBySurveyID(all_surveys.get(i).getId());
                     responses_count.put(all_surveys.get(i).getId(), survey_answers.size());
                 }
-            }
-            
-            request.setAttribute("Surveys", other_surveys);
-            request.setAttribute("ResponsesCount", responses_count);
-            if(userType.equals("admin")){
+
+                request.setAttribute("Surveys", all_surveys);
+                request.setAttribute("ResponsesCount", responses_count);
                 request.getRequestDispatcher("Admin/admin_home.jsp").forward(request, response);
             }
             else{
+                ArrayList<Survey> all_surveys = SurveyModel.getAll();
+                ArrayList<Survey> other_surveys = new ArrayList<>();
+                HashMap<Integer,Integer> responses_count = new HashMap<>();
+                for(int i =0;i < all_surveys.size();i++)
+                {
+                    if(all_surveys.get(i).getCreator_id() != user_id){
+                        other_surveys.add(all_surveys.get(i));
+                        ArrayList<SurveyAnswer> survey_answers = SurveyAnswerModel.getBySurveyID(all_surveys.get(i).getId());
+                        responses_count.put(all_surveys.get(i).getId(), survey_answers.size());
+                    }
+                }
+
+                request.setAttribute("Surveys", other_surveys);
+                request.setAttribute("ResponsesCount", responses_count);
                 request.getRequestDispatcher("User/user_home.jsp").forward(request, response);
             }
         }

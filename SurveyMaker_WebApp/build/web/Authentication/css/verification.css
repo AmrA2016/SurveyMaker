@@ -1,8 +1,6 @@
 .main{
   margin-top: 150px;
   background-color: white;
-  margin-left: -20px;
-  width: 500px;
   height: 300px;
   text-align: center;
   box-shadow: 2px 2px 10px grey;
@@ -13,8 +11,7 @@
   top: 100px;
 }
 body {
-  background: #EFF5FB; /* fallback for old browsers */
-  background: -moz-linear-gradient(#EFF5FB);
+  background: whitesmoke;
 }
 .app-name{
   position: relative;
@@ -22,6 +19,7 @@ body {
   margin: 0 auto;
   width: 300px;
   border-bottom: 1px solid #D1D1D1;
+  color: #0abab5;
 }
 #surveymaker{
   text-align: center;
