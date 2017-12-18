@@ -13,8 +13,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -120,6 +128,12 @@ public class AdminServlet extends HttpServlet {
             {
                 int id = Integer.parseInt(request.getParameter("user_id"));
                 user.setAdmin(id);
+                
+                Notification notification = new Notification("You became an admin");
+                NotificationModel NotificationModel = new NotificationModel();
+                int notificationID = NotificationModel.save(notification);
+                UserModel.notify(id, notificationID);
+                
                 response.sendRedirect(request.getContextPath() + "/GetUsers");
             }else{
                 response.sendRedirect(request.getContextPath() + "/Home");
@@ -133,7 +147,6 @@ public class AdminServlet extends HttpServlet {
     {
         HttpSession session = request.getSession();
         Integer user_id = (Integer)session.getAttribute("user_id");
-        UserModel user = new UserModel();
         
         if(user_id != null)
         {
@@ -141,7 +154,17 @@ public class AdminServlet extends HttpServlet {
             if(userType.equals("admin"))
             {
                 int id = Integer.parseInt(request.getParameter("user_id"));
-                user.setSuspended(id);
+                UserModel.setSuspended(id);
+                
+                User user = UserModel.getByID(id);
+                String receiver = user.getMail();
+                String subject = "Survey Maker| Suspension inform";
+                String message = "Dear " + user.getFirstName() + ",\n"
+                                +"You have been suspended from entering Survey Maker website.\n"
+                                + "If you see that there's mistake, please don't hesitate to mail us\n\n"
+                                + "Regareds,\nAdmin";
+                sendMail(receiver, subject, message);
+                
                 response.sendRedirect(request.getContextPath() + "/GetUsers");
             }else{
                 response.sendRedirect(request.getContextPath() + "/Home");
@@ -155,7 +178,6 @@ public class AdminServlet extends HttpServlet {
     {
         HttpSession session = request.getSession();
         Integer user_id = (Integer)session.getAttribute("user_id");
-        UserModel user = new UserModel();
         
         if(user_id != null)
         {
@@ -163,7 +185,17 @@ public class AdminServlet extends HttpServlet {
             if(userType.equals("admin"))
             {
                 int id = Integer.parseInt(request.getParameter("user_id"));
-                user.setUnSuspended(id);
+                UserModel.setUnSuspended(id);
+                
+                User user = UserModel.getByID(id);
+                
+                String receiver = user.getMail();
+                String subject = "Survey Maker| Unsuspension inform";
+                String message = "Dear " + user.getFirstName() + ",\n"
+                                +"Your account now is unsuspended!\n"
+                                + "We are sorry for misunderstading, you're welcomed in our website.\n\n"
+                                + "Regareds,\nAdmin";
+                sendMail(receiver, subject, message);
                 response.sendRedirect(request.getContextPath() + "/GetUsers");
             }else{
                 response.sendRedirect(request.getContextPath() + "/Home");
@@ -212,7 +244,7 @@ public class AdminServlet extends HttpServlet {
             
             String target = request.getParameter("target");
             String messageContent = request.getParameter("message_content");
-            Notification notification = new Notification(messageContent);
+            Notification notification = new Notification("Admin sent you: " + messageContent);
             NotificationModel NotificationModel = new NotificationModel();
             
             int notificationID = NotificationModel.save(notification);
@@ -232,6 +264,53 @@ public class AdminServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/Home");
             //response.getWriter().print("hi");
             
+        }
+    }
+    
+    private boolean sendMail(String Reciever, String subject, String text) {
+
+        String username = "surveymaker.owner@gmail.com";
+        String password = "iaP@ssw0rd!";
+
+        String from = "surveymaker.owner@gmail.com";
+
+        String to = Reciever;
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            // Create a default MimeMessage object.
+            MimeMessage message = new MimeMessage(session);
+
+            // Set From: header field of the header.
+            message.setFrom(new InternetAddress(from));
+
+            // Set To: header field of the header.
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+            // Set Subject: header field
+            message.setSubject(subject);
+
+            // Now set the actual message
+            message.setText(text);
+
+            // Send message
+            Transport.send(message);
+            return true;
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+            return false;
         }
     }
 }
