@@ -182,19 +182,23 @@ public class MainServlet extends HttpServlet {
         } else {
 
             if (user.getPassword().equals(password)) {
-                if (user.isVerified() == true) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("user_id", user.getId());
-                    if (user.isAdmin() == true) {
-                        session.setAttribute("user_type", "admin");
-                    } else {
-                        session.setAttribute("user_type", "user");
-                    }
-                    
+                if(user.isSuspended())
                     response.sendRedirect(request.getContextPath() + "/Home");
-                }else{
-                    
-                    response.sendRedirect("Authentication/confirm_account.jsp");
+                else{
+                    if (user.isVerified() == true) {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("user_id", user.getId());
+                        if (user.isAdmin() == true) {
+                            session.setAttribute("user_type", "admin");
+                        } else {
+                            session.setAttribute("user_type", "user");
+                        }
+
+                        response.sendRedirect(request.getContextPath() + "/Home");
+                    }else{
+
+                        response.sendRedirect("Authentication/confirm_account.jsp");
+                    }
                 }
 
             }else{

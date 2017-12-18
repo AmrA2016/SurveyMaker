@@ -34,7 +34,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Manar Ashraf
  */
-@WebServlet(name = "AdminServlet", urlPatterns = {"/Make_Admin", "/Suspend_User", "/Unsuspend_User" , "/GetUsers", "/Admin_sendMessage"})
+@WebServlet(name = "AdminServlet", urlPatterns = {"/Make_Admin", "/Suspend_User", "/Unsuspend_User" , 
+                                                  "/GetUsers", "/Admin_sendMessage","/Admin_ChangePassword"})
 public class AdminServlet extends HttpServlet {
 
     /**
@@ -61,6 +62,9 @@ public class AdminServlet extends HttpServlet {
             getUsers(request, response);
         }else if (path.equals("/Admin_sendMessage")) {
             sendMessage(request, response);
+        }
+        else if (path.equals("/Admin_ChangePassword")) {
+            adminChangePassword(request, response);
         }
     }
 
@@ -241,29 +245,51 @@ public class AdminServlet extends HttpServlet {
         if(user_id == null)
             response.sendRedirect(request.getContextPath() + "/Home");
          else {
-            
-            String target = request.getParameter("target");
-            String messageContent = request.getParameter("message_content");
-            Notification notification = new Notification("Admin sent you: " + messageContent);
-            NotificationModel NotificationModel = new NotificationModel();
-            
-            int notificationID = NotificationModel.save(notification);
-            
-            ArrayList<Integer> targetIDs = new ArrayList<Integer>();
-            if(target.equals("allUsers")){
-                targetIDs = UserModel.getAllNormalUsers();
+            String user_type = (String)session.getAttribute("user_type");
+            if(user_type.equals("admin")){
+                String target = request.getParameter("target");
+                String messageContent = request.getParameter("message_content");
+                Notification notification = new Notification("Admin sent you: " + messageContent);
+                NotificationModel NotificationModel = new NotificationModel();
+
+                int notificationID = NotificationModel.save(notification);
+
+                ArrayList<Integer> targetIDs = new ArrayList<Integer>();
+                if(target.equals("allUsers")){
+                    targetIDs = UserModel.getAllNormalUsers();
+                }
+                else{
+                    targetIDs.add(Integer.parseInt(target));
+                }
+
+                for(int i=0 ; i<targetIDs.size();i++){
+                    UserModel.notify(targetIDs.get(i), notificationID);
+                }
             }
-            else{
-                targetIDs.add(Integer.parseInt(target));
-            }
-            
-            for(int i=0 ; i<targetIDs.size();i++){
-                UserModel.notify(targetIDs.get(i), notificationID);
-            }
-            
             response.sendRedirect(request.getContextPath() + "/Home");
             //response.getWriter().print("hi");
             
+        }
+    }
+    
+    private void adminChangePassword(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException {
+        HttpSession session = request.getSession();
+        Integer user_id = (Integer)session.getAttribute("user_id");
+        if(user_id == null)
+            response.sendRedirect(request.getContextPath() + "/Home");
+        else{
+            String user_type = (String)session.getAttribute("user_type");
+            if(user_type.equals("admin")){
+                int id = Integer.parseInt(request.getParameter("user_id"));
+                
+                String newPassword = (String) request.getParameter("new_password");
+                UserModel.changePasswrod(id, newPassword);
+                
+                response.sendRedirect(request.getContextPath() + "/GetUsers");
+            }
+            else{
+                response.sendRedirect(request.getContextPath() + "/Home");
+            }
         }
     }
     
