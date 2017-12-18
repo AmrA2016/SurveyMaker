@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2017 at 09:39 AM
+-- Generation Time: Dec 18, 2017 at 07:29 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -44,7 +44,28 @@ CREATE TABLE `answer` (
 INSERT INTO `answer` (`ID`, `answerContent`, `question_id`, `survey_answer_id`) VALUES
 (1, 'Yes', 2, 1),
 (2, 'Games|Swimming', 3, 1),
-(3, 'Any text', 4, 1);
+(3, 'Any text', 4, 1),
+(4, 'Yes', 2, 2),
+(5, 'Swimming|Reading', 3, 2),
+(6, 'Just another answer', 4, 2),
+(7, 'No', 2, 3),
+(8, 'Games', 3, 3),
+(9, 'Any text', 4, 3),
+(10, 'Yes', 2, 4),
+(11, 'Swimming|Reading', 3, 4),
+(12, 'Nothing to tell :P', 4, 4),
+(13, '21', 5, 5),
+(14, 'Cinema', 6, 5),
+(15, 'Action/Adventure|Drama|Sci-Fiction', 7, 5),
+(16, 'Inception', 8, 5),
+(17, '21', 5, 6),
+(18, 'Home', 6, 6),
+(19, 'Action|Drama|Horror', 7, 6),
+(20, 'No country for old men', 8, 6),
+(21, '21', 9, 7),
+(22, 'PC', 10, 7),
+(23, 'Arcade|Sports', 11, 7),
+(24, '5', 12, 7);
 
 -- --------------------------------------------------------
 
@@ -63,13 +84,35 @@ CREATE TABLE `choice` (
 --
 
 INSERT INTO `choice` (`ID`, `content`, `question_id`) VALUES
-(1, 'Option1', 1),
-(2, 'Option2', 1),
 (3, 'Yes', 2),
 (4, 'No', 2),
 (5, 'Games', 3),
 (6, 'Swimming', 3),
-(7, 'Reading', 3);
+(7, 'Reading', 3),
+(8, 'Home', 6),
+(9, 'Cinema', 6),
+(10, 'Cafe', 6),
+(11, 'Action', 7),
+(12, 'Action/Adventure', 7),
+(13, 'Adventure', 7),
+(14, 'Drama', 7),
+(15, 'Romance', 7),
+(16, 'Horror', 7),
+(17, 'Sci-Fiction', 7),
+(18, 'PC', 10),
+(19, 'Playstation', 10),
+(20, 'Xbox', 10),
+(21, 'WII', 10),
+(22, 'Mobile', 10),
+(23, 'Action', 11),
+(24, 'Adventure', 11),
+(25, 'Action/Adventure', 11),
+(26, 'Arcade', 11),
+(27, 'Racing', 11),
+(28, 'Fight', 11),
+(29, 'Horror', 11),
+(30, 'Dance', 11),
+(31, 'Sports', 11);
 
 -- --------------------------------------------------------
 
@@ -82,6 +125,20 @@ CREATE TABLE `notification` (
   `content` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `notification`
+--
+
+INSERT INTO `notification` (`ID`, `content`) VALUES
+(1, 'Just test'),
+(2, 'Another test'),
+(3, 'Admin suspended your survey with name: Survey 2'),
+(4, 'user with id = 9 report the survey with id = 4'),
+(5, 'user with id = 9 report the survey with id = 4'),
+(6, 'Admin suspended your survey with name: Film Survey'),
+(7, 'Admin unsuspended your survey with name: Film Survey'),
+(8, 'Admin suspended your survey with name: Film Survey');
+
 -- --------------------------------------------------------
 
 --
@@ -91,8 +148,23 @@ CREATE TABLE `notification` (
 CREATE TABLE `notification_user` (
   `ID` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `notification_id` int(11) NOT NULL
+  `notification_id` int(11) NOT NULL,
+  `seen` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `notification_user`
+--
+
+INSERT INTO `notification_user` (`ID`, `user_id`, `notification_id`, `seen`) VALUES
+(1, 6, 1, 1),
+(2, 6, 2, 1),
+(3, 6, 3, 1),
+(4, 8, 4, 1),
+(5, 8, 5, 1),
+(6, 9, 6, 1),
+(7, 9, 7, 1),
+(8, 9, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -112,10 +184,17 @@ CREATE TABLE `question` (
 --
 
 INSERT INTO `question` (`ID`, `content`, `type`, `survey_id`) VALUES
-(1, 'Question 1', 'mcq', 1),
 (2, 'Graduated?', 'mcq', 4),
 (3, 'Your Hobbies ?', 'checkbox', 4),
-(4, 'Tell us about your project you made.', 'open', 4);
+(4, 'Tell us about your project you made.', 'open', 4),
+(5, 'Your age?', 'open', 5),
+(6, 'Favorite place to watch movies?', 'mcq', 5),
+(7, 'Your favorite genre?', 'checkbox', 5),
+(8, 'Favorite film of all time?', 'open', 5),
+(9, 'Your age?', 'open', 6),
+(10, 'What is the console you use?', 'mcq', 6),
+(11, 'What is your favorite types of games?', 'checkbox', 6),
+(12, 'What are the average hours you spent a week on gaming?', 'open', 6);
 
 -- --------------------------------------------------------
 
@@ -129,6 +208,13 @@ CREATE TABLE `report` (
   `survey_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `report`
+--
+
+INSERT INTO `report` (`ID`, `content`, `survey_id`, `user_id`) VALUES
+(2, 'It contains inappropriate content', 4, 9);
 
 -- --------------------------------------------------------
 
@@ -149,8 +235,9 @@ CREATE TABLE `survey` (
 --
 
 INSERT INTO `survey` (`ID`, `title`, `creationDate`, `suspended`, `creator_id`) VALUES
-(1, 'Survey 1', '2017/12/08 20:26:39', 0, 6),
-(4, 'Survey 2', '2017/12/10 06:13:28', 0, 6);
+(4, 'Survey 2', '2017/12/10 06:13:28', 0, 6),
+(5, 'Film Survey', '2017/12/18 08:03:43', 0, 9),
+(6, 'Games Survey', '2017/12/18 08:15:32', 0, 6);
 
 -- --------------------------------------------------------
 
@@ -170,7 +257,13 @@ CREATE TABLE `survey_answer` (
 --
 
 INSERT INTO `survey_answer` (`ID`, `ShowInfo`, `survey_id`, `user_id`) VALUES
-(1, 0, 4, 6);
+(1, 0, 4, 6),
+(2, 0, 4, 6),
+(3, 0, 4, 6),
+(4, 1, 4, 9),
+(5, 0, 5, 6),
+(6, 0, 5, 6),
+(7, 0, 6, 9);
 
 -- --------------------------------------------------------
 
@@ -196,7 +289,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`ID`, `firstName`, `lastName`, `mail`, `password`, `mobileNumber`, `admin`, `suspended`, `verified`) VALUES
 (6, 'Amr', 'Atef', 'amr.atef96@hotmail.com', 'abc123', '0111333456', 0, 0, 1),
-(8, 'Muhamed', 'Ahmed', 'muhamed@gmail.com', '123456', '123456', 1, 0, 1);
+(8, 'Muhamed', 'Ahmed', 'muhamed@gmail.com', '123456', '123456', 1, 0, 1),
+(9, 'Manar', 'Ashraf', 'manarashraf711@gmail.com', 'abcabc', '0123456789', 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -209,6 +303,13 @@ CREATE TABLE `verfication_token` (
   `token` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `verfication_token`
+--
+
+INSERT INTO `verfication_token` (`id`, `token`, `user_id`) VALUES
+(1, 'manarashraf711@gmail.com_4e8c4ac9-8ce5-44d0-8660-771a3d93fa7a', 9);
 
 --
 -- Indexes for dumped tables
@@ -294,61 +395,61 @@ ALTER TABLE `verfication_token`
 -- AUTO_INCREMENT for table `answer`
 --
 ALTER TABLE `answer`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `choice`
 --
 ALTER TABLE `choice`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `notification_user`
 --
 ALTER TABLE `notification_user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `survey_answer`
 --
 ALTER TABLE `survey_answer`
-  MODIFY `ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `verfication_token`
 --
 ALTER TABLE `verfication_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

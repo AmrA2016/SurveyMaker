@@ -197,7 +197,7 @@ public class SurveyServlet extends HttpServlet {
                 UserModel.notify(adminIDs.get(i), notificationID);
             }
             
-            response.sendRedirect("User/user_home.jsp");
+            response.sendRedirect(request.getContextPath() + "/Home");
             
         }
         

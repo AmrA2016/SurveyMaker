@@ -24,7 +24,7 @@
                             <div class = "app-name">
                                 <h2 id= "surveymaker"> Survey Maker </h2>
                             </div>
-                            <h2 class="text-primary">Confirmation mail sent!</h2>
+                            <h2 class="text-default">Confirmation mail sent!</h2>
                             <p class="text-muted"> Please check your mail and confirm your account<p>
                         </div>
                         <div>

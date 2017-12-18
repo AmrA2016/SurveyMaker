@@ -69,7 +69,7 @@
                                     if(unread_count > 0)
                                     {
                                 %>
-                                <span class="badge badge-notify"><%= unread_count %></span>
+                                <span id="notification-count" class="badge badge-notify"><%= unread_count %></span>
                                 <%
                                     }
                                 %>
@@ -219,7 +219,9 @@
                 for (int i = 0; i < notifications.size(); i++) {
                     UserModel.readNotification(notifications.get(i).getId());
                 }
-            %>    
+            %>
+            document.getElementById("notification-count").style.display = "none";
+            
         };
     </script>
 </html>

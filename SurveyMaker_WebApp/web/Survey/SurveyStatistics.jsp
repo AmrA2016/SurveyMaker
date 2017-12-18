@@ -106,6 +106,8 @@
     <script>
         $(function () {
         <% for (int i = 0; i < questions.size(); i++) {
+                    if(questions.get(i).getType().equals("open"))
+                        continue;
                     HashMap<String, Integer> answers_map = questions_answers.get(questions.get(i).getId());
                     ArrayList<HashMap<Object, Object>> data_list = new ArrayList<HashMap<Object, Object>>();
 

@@ -153,8 +153,8 @@ $(document).on("click", ".add-option", function () {
                             <input type="text" class="form-control question-option" name="question' + question_number + '_option' + $options_count.val() + '" value="Option"> \
                         </div> \
                         <div class="col-md-2 option-buttons" > \
-                            <a href="#" class="add-option "><i class="fa fa-plus-circle" aria-hidden="true"></i></a> \
-                            <a href="#" class="del-option "><i class="fa fa-minus-circle" aria-hidden="true"></i></a> \
+                            <a class="add-option "><i class="fa fa-plus-circle" aria-hidden="true"></i></a> \
+                            <a class="del-option "><i class="fa fa-minus-circle" aria-hidden="true"></i></a> \
                         </div> \
                     </div>');
 
@@ -206,8 +206,8 @@ $("#add-question-form").on("submit",function(event){
                                         <input type="text" class="form-control question-option" name="question' + questions_count + '_option1" value="Option"> \
                                     </div> \
                                     <div class="col-md-2 option-buttons"> \
-                                        <a href="#" class="add-option "><i class="fa fa-plus-circle" aria-hidden="true"></i></a> \
-                                        <a href="#" class="del-option "><i class="fa fa-minus-circle" aria-hidden="true"></i></a>\
+                                        <a class="add-option "><i class="fa fa-plus-circle" aria-hidden="true"></i></a> \
+                                        <a class="del-option "><i class="fa fa-minus-circle" aria-hidden="true"></i></a>\
                                     </div> \
                                 </div> \
                                 <div class="question-buttons"> \
@@ -230,8 +230,8 @@ $("#add-question-form").on("submit",function(event){
                                         <input type="text" class="form-control question-option" name="question' + questions_count + '_option1" value="Option"> \
                                     </div> \
                                     <div class="col-md-2 option-buttons"> \
-                                        <a href="#" class="add-option "><i class="fa fa-plus-circle" aria-hidden="true"></i></a> \
-                                        <a href="#" class="del-option "><i class="fa fa-minus-circle" aria-hidden="true"></i></a>\
+                                        <a class="add-option "><i class="fa fa-plus-circle" aria-hidden="true"></i></a> \
+                                        <a class="del-option "><i class="fa fa-minus-circle" aria-hidden="true"></i></a>\
                                     </div> \
                                 </div> \
                                 <div class="question-buttons"> \

@@ -58,10 +58,10 @@
 
                             <div class="survey-footer">
                                 <div class="icons">
-                                    <a class="view-survey" href=<% out.print(request.getContextPath() + "/Survey_ViewSurvey?survey_id=" + surveys.get(i).getId()); %> title="View survey">
+                                    <a class="view-survey" title="View survey" href=<% out.print(request.getContextPath() + "/Survey_ViewSurvey?survey_id=" + surveys.get(i).getId()); %>  >
                                        <i class="fa fa-eye fa-lg icon" aria-hidden="true"></i>
                                     </a>
-                                    <a class="report-survey" href="#" data-toggle="modal" data-target="#reportSurvey" title="Report survey">
+                                    <a class="report-survey" href="#" data-survey-id=<%= surveys.get(i).getId() %> data-toggle="modal" data-target="#reportSurvey" title="Report survey">
                                         <i class="fa fa-pencil-square-o fa-lg icon" aria-hidden="true"></i>
                                     </a>
                                 </div>
@@ -86,8 +86,9 @@
                         <button class="close" data-dismiss="modal">&times;</button>   
                     </div>
                     <form action="${pageContext.request.contextPath}/Survey_ReportSurvey" method="post">
+                        <input type="number" name="survey_id" hidden="hidden">
                         <div class="modal-body">
-                            <textarea class="form-control" rows="3" placeholder="Reasons For Reporting "></textarea>
+                            <textarea class="form-control" name="report_content" rows="3" placeholder="Reasons For Reporting "></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn">Report Survey</button>
@@ -101,4 +102,10 @@
     </body>
     <script src="${pageContext.request.contextPath}/Global/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/Global/js/bootstrap.js"></script>
+    <script>
+        $(document).on("click",".report-survey",function(){
+            var survey_id = $(this).data("survey-id");
+            $("#reportSurvey input[name='survey_id']").val(survey_id);
+        });
+    </script>
 </html>
