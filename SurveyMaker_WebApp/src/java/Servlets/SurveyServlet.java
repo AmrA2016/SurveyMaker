@@ -151,8 +151,21 @@ public class SurveyServlet extends HttpServlet {
         if(user_id == null)
             response.sendRedirect(request.getContextPath() + "/Home");
         else{
+            String user_type = (String)session.getAttribute("user_type");
             Integer surveyID = Integer.parseInt(request.getParameter("survey_id"));
+            Survey survey = SurveyModel.getByID(surveyID);
+            
+            if(survey.getCreator_id() != user_id && user_type.equals("user"))
+                response.sendRedirect(request.getContextPath() + "/Home");
+                
+            
             result = SurveyModel.remove(surveyID);
+            
+            if(user_type.equals("admin") && user_id != survey.getCreator_id()){
+                Notification notification = new Notification("Admin removed your survey with name: " + survey.getTitle());
+                int notificationID = NotificationModel.save(notification);
+                UserModel.notify(survey.getCreator_id(), notificationID);
+            }
         }
         
         return result;
@@ -173,7 +186,7 @@ public class SurveyServlet extends HttpServlet {
             int result = ReportModel.save(report);
             
             //create notification record
-            Notification notification = new Notification("user with id = " + user_id + " report the survey with id = " + surveyID + " because : "+ reportContent);
+            Notification notification = new Notification("user with id = " + user_id + " report the survey with id = " + surveyID);
             NotificationModel NotificationModel = new NotificationModel();
             int notificationID = NotificationModel.save(notification);
             
@@ -197,8 +210,21 @@ public class SurveyServlet extends HttpServlet {
         if(user_id == null)
             response.sendRedirect(request.getContextPath() + "/Home");
         else{
+            String user_type = (String)session.getAttribute("user_type");
             Integer surveyID = Integer.parseInt(request.getParameter("survey_id"));
+            Survey survey = SurveyModel.getByID(surveyID);
+            
+            if(survey.getCreator_id() != user_id && user_type.equals("user"))
+                response.sendRedirect(request.getContextPath() + "/Home");
+                
+            
             result = SurveyModel.suspend(surveyID);
+            
+            if(user_type.equals("admin") && user_id != survey.getCreator_id()){
+                Notification notification = new Notification("Admin suspended your survey with name: " + survey.getTitle());
+                int notificationID = NotificationModel.save(notification);
+                UserModel.notify(survey.getCreator_id(), notificationID);
+            }
         }
         
         return result;
@@ -212,8 +238,21 @@ public class SurveyServlet extends HttpServlet {
         if(user_id == null)
             response.sendRedirect(request.getContextPath() + "/Home");
         else{
+            String user_type = (String)session.getAttribute("user_type");
             Integer surveyID = Integer.parseInt(request.getParameter("survey_id"));
+            Survey survey = SurveyModel.getByID(surveyID);
+            
+            if(survey.getCreator_id() != user_id && user_type.equals("user"))
+                response.sendRedirect(request.getContextPath() + "/Home");
+                
+            
             result = SurveyModel.unSuspend(surveyID);
+            
+            if(user_type.equals("admin") && user_id != survey.getCreator_id()){
+                Notification notification = new Notification("Admin unsuspended your survey with name: " + survey.getTitle());
+                int notificationID = NotificationModel.save(notification);
+                UserModel.notify(survey.getCreator_id(), notificationID);
+            }
         }
         
         return result;
