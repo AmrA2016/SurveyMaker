@@ -16,10 +16,8 @@
     <body>
         <jsp:include page="Global/navbar.jsp" />
         <div class="wrapper">
-            <div class = "container">
-                <div class = "col-lg-4">
-                </div>
-                <div class="col-lg-4">
+            <div class = "container ">
+                <div class="col-md-6 col-md-offset-3">
                     <div class="jumbotron">
                         <div class = "app-name">
                             <h2 id= "surveymaker"> Survey Maker </h2>
