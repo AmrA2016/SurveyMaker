@@ -18,9 +18,7 @@
 
         <div class="wrapper">
             <div class = "container">
-                <div class = "col-lg-4">
-                </div>
-                <div class="col-lg-4">
+                <div class="col-md-6 col-md-offset-3">
                     <div class = "main">
                         <div class="paragraph">
                             <div class = "app-name">

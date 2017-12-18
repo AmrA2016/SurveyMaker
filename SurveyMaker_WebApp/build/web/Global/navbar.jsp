@@ -168,7 +168,7 @@
         <div class="modal fade" id="sendMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
-                  <form id="messageForm" method="get" action="${pageContext.request.contextPath}/User_sendMessage">
+                  <form id="messageForm" method="get" action="${pageContext.request.contextPath}/Admin_sendMessage">
                     <div class="modal-header title">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       <h4 class="modal-title" id="myModalLabel">Send Message Form</h4>

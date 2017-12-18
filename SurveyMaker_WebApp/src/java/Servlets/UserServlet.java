@@ -38,7 +38,7 @@ import javax.servlet.http.HttpSession;
  * @author Amr
  */
 @WebServlet(name = "UserServlet", urlPatterns = {"/User_GetSignupForm", "/User_Register",
-    "/User_VerifyAccount", "/User_GetMySurveys" , "/User_sendMessage"})
+    "/User_VerifyAccount", "/User_GetMySurveys" })
 public class UserServlet extends HttpServlet {
 
     /**
@@ -62,8 +62,6 @@ public class UserServlet extends HttpServlet {
             verifyAccount(request, response);
         } else if (path.equals("/User_GetMySurveys")) {
             getMySurveys(request, response);
-        }else if (path.equals("/User_sendMessage")) {
-            sendMessage(request, response);
         }
     }
 

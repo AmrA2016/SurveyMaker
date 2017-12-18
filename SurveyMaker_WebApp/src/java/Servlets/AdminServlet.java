@@ -5,7 +5,9 @@
  */
 package Servlets;
 
+import Entities.Notification;
 import Entities.User;
+import Models.NotificationModel;
 import Models.UserModel;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,7 +26,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Manar Ashraf
  */
-@WebServlet(name = "AdminServlet", urlPatterns = {"/Make_Admin", "/Suspend_User", "/Unsuspend_User" , "/GetUsers"})
+@WebServlet(name = "AdminServlet", urlPatterns = {"/Make_Admin", "/Suspend_User", "/Unsuspend_User" , "/GetUsers", "/Admin_sendMessage"})
 public class AdminServlet extends HttpServlet {
 
     /**
@@ -49,6 +51,8 @@ public class AdminServlet extends HttpServlet {
         }
         else if(path.equals("/GetUsers")){
             getUsers(request, response);
+        }else if (path.equals("/Admin_sendMessage")) {
+            sendMessage(request, response);
         }
     }
 
@@ -193,6 +197,40 @@ public class AdminServlet extends HttpServlet {
             }
         }else{
             response.sendRedirect(request.getContextPath() + "/Home");
+            
+        }
+    }
+    
+    private void sendMessage(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException, ServletException {
+         HttpSession session = request.getSession();
+        Integer user_id = (Integer)session.getAttribute("user_id");
+        
+        
+        if(user_id == null)
+            response.sendRedirect(request.getContextPath() + "/Home");
+         else {
+            
+            String target = request.getParameter("target");
+            String messageContent = request.getParameter("message_content");
+            Notification notification = new Notification(messageContent);
+            NotificationModel NotificationModel = new NotificationModel();
+            
+            int notificationID = NotificationModel.save(notification);
+            
+            ArrayList<Integer> targetIDs = new ArrayList<Integer>();
+            if(target.equals("allUsers")){
+                targetIDs = UserModel.getAllNormalUsers();
+            }
+            else{
+                targetIDs.add(Integer.parseInt(target));
+            }
+            
+            for(int i=0 ; i<targetIDs.size();i++){
+                UserModel.notify(targetIDs.get(i), notificationID);
+            }
+            
+            response.sendRedirect(request.getContextPath() + "/Home");
+            //response.getWriter().print("hi");
             
         }
     }
